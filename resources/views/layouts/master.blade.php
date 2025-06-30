@@ -113,6 +113,7 @@
     background-color: #fff;
     padding: 20px 50px;
     border-top: 1px solid #e0e0e0;
+    margin-top: 0;
   }
   </style>
 
