@@ -3,7 +3,7 @@
 
 @push('styles')
 <style>
-/* Reset & box‑sizing */
+/* Reset & box-sizing */
 *,
 *::before,
 *::after {
@@ -17,7 +17,6 @@
   position: relative;
   width: 100%;
   height: calc(100vh - 72px);
-  /* kurangi header ~72px */
   display: flex;
   align-items: center;
   padding: 0 7vw;
@@ -29,10 +28,8 @@
   content: "";
   position: absolute;
   inset: 0;
-  /* top:0; right:0; bottom:0; left:0; */
-  background: url('{{ asset("assets/images/bg.png") }}') center/cover no-repeat;
+  background: url('{{ asset("assets/images/page1_1//bg.png") }}') center/cover no-repeat;
   opacity: 1;
-  /* 8% opacity */
   z-index: 1;
 }
 
@@ -42,7 +39,6 @@
   position: absolute;
   inset: 0;
   background: rgba(255, 255, 255, 0.4);
-  /* 50% putih */
   z-index: 2;
 }
 
@@ -70,7 +66,6 @@
   font-weight: 450;
   line-height: 1.2;
   margin-bottom: 16px;
-
 }
 
 .hero-text p {
@@ -103,12 +98,10 @@
   position: absolute;
   width: 350px;
   height: 500px;
-  background: url('{{ asset("assets/images/ellipse.png") }}') center/contain no-repeat;
+  background: url('{{ asset("assets/images/page1_1/ellipse.png") }}') center/contain no-repeat;
   pointer-events: none;
   opacity: 1;
-  /* tampil penuh */
   z-index: 3;
-  /* di atas bg, di bawah teks */
 }
 
 .ellipse.top-right {
@@ -131,7 +124,6 @@
   z-index: 4;
   width: 210px;
   height: 210px;
-
 }
 
 .img-mobil {
@@ -141,6 +133,71 @@
   height: 260px;
   z-index: 4;
 }
+
+/* ===== Section “Apa itu Carbon Footprint?” ===== */
+.about {
+  background-color: #FFFDE7;
+  padding: 80px 0 60px 0;
+  /* ruang atas dan bawah */
+  position: relative;
+}
+
+.about-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  /* semua anak dirapatkan ke bawah */
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 0;
+  /* hapus padding/margin bottom di container */
+}
+
+.about-image-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 380px;
+  /* ukuran gambar yang lebih kecil */
+  height: auto;
+  z-index: 2;
+}
+
+.about-circle {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.about-photo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.about-text {
+  text-align: left;
+  /* teks rata kiri */
+  max-width: 800px;
+  margin-top: 2px;
+  /* beri jarak atas */
+  margin-bottom: 60px;
+  /* dan juga jarak bawah */
+  margin-left: 410px;
+}
+
+
+.about-text p {
+  color: #777777;
+  font-family: 'Poppins';
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
 
 /* Responsive */
 @media (max-width: 1024px) {
@@ -157,6 +214,14 @@
   .img-mobil {
     width: 180px;
     height: 180px;
+  }
+
+  .about-image-wrapper {
+    width: 250px;
+  }
+
+  .about-text {
+    margin-left: 270px;
   }
 }
 
@@ -176,16 +241,38 @@
   .ellipse {
     display: none;
   }
+
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-image-wrapper {
+    position: static;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .about-photo {
+    position: static;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .about-text {
+    margin-left: 0;
+    margin-bottom: 40px;
+  }
+
+
+
 }
 </style>
 @endpush
 
 @section('content')
 <section class="hero">
-  {{-- Lingkaran dekoratif --}}
   <div class="ellipse top-right"></div>
-
-  {{-- Teks kiri --}}
   <div class="hero-text">
     <div class="subtitle">Calculator Karbon</div>
     <h1>Hitung Jejak Karbon<br>Kendaraanmu Sekarang</h1>
@@ -195,9 +282,28 @@
     </p>
     <a href="{{ route('kalkulator') }}" class="btn-start">Mulai Hitung Sekarang</a>
   </div>
+  <img src="{{ asset('assets/images/page1_1//mobil.png') }}" alt="Mobil" class="img-mobil">
+  <img src="{{ asset('assets/images/page1_1//motor.png') }}" alt="Motor" class="img-motor">
+</section>
 
-  {{-- Gambar kendaraan bulat --}}
-  <img src="{{ asset('assets/images/mobil.png') }}" alt="Mobil" class="img-mobil">
-  <img src="{{ asset('assets/images/motor.png') }}" alt="Motor" class="img-motor">
+<section class="about">
+  <div class="about-container">
+    <div class="about-image-wrapper">
+      <img src="{{ asset('assets/images/page1_2/asset1_2.2.png') }}" alt="Lingkaran Biru" class="about-circle">
+      <img src="{{ asset('assets/images/page1_2/asset1_2.1.png') }}" alt="Orang & Turbin" class="about-photo">
+    </div>
+    <div class="about-text">
+      <h2>Apa itu Carbon Footprint ?</h2> <br>
+      <p>
+        Jejak karbon adalah jumlah total emisi gas rumah kaca—terutama karbon dioksida (CO₂)—yang dihasilkan oleh
+        aktivitas manusia.
+        Contohnya, saat kita mengendarai motor atau mobil, membakar bahan bakar menghasilkan CO₂ yang ikut mencemari
+        udara dan mempercepat perubahan iklim.
+        Dengan menghitung jejak karbon kendaraanmu, kamu bisa lebih sadar dampak aktivitas sehari-hari terhadap
+        lingkungan,
+        dan ikut serta mengurangi emisi dengan langkah sederhana seperti menanam pohon atau ikut program carbon offset.
+      </p>
+    </div>
+  </div>
 </section>
 @endsection
