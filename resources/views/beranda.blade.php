@@ -96,7 +96,7 @@
 /* Lingkaran dekorasi */
 .ellipse {
   position: absolute;
-  width: 350px;
+  width: 355px;
   height: 500px;
   background: url('{{ asset("assets/images/page1_1/ellipse.png") }}') center/contain no-repeat;
   pointer-events: none;
@@ -106,32 +106,31 @@
 
 .ellipse.top-right {
   top: -40px;
-  right: -30px;
+  right: -40px;
 }
 
 /* Gambar kendaraan */
 .img-motor,
 .img-mobil {
   position: absolute;
-  border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); */
 }
 
 .img-motor {
-  top: 60px;
+  top: 25px;
   right: 230px;
   z-index: 4;
-  width: 210px;
-  height: 210px;
+  width: 220px;
+  height: auto;
 }
 
 .img-mobil {
-  bottom: 70px;
-  right: 60px;
-  width: 270px;
-  height: 260px;
-  z-index: 4;
+  bottom: 80px;
+  right: 50px;
+  width: 280px;
+  height: auto;
+  z-index: 5;
 }
 
 /* ===== Section “Apa itu Carbon Footprint?” ===== */
@@ -199,6 +198,106 @@
 }
 
 
+/* ===== Section “Kenali Sumber Jejak Karbonmu” ===== */
+.sources {
+  position: relative;
+  background: #fff;
+  padding: 80px 7vw 100px;
+}
+
+.sources-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #222;
+}
+
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.source-card {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 24px 16px;
+  text-align: center;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+  overflow: visible;
+}
+
+.source-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.source-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: #333;
+}
+
+.source-card p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #777;
+}
+
+/* Dekorasi kanan atas */
+.decoration.top-right {
+  position: absolute;
+  top: 0;
+  right: calc(-3vw);
+  /* geser ke kanan sejauh padding */
+  width: 200px;
+  /* sesuaikan */
+  height: 200px;
+  /* sesuaikan */
+  background: url('{{ asset("assets/images/page1_3/asset1_3.6.png") }}') center/contain no-repeat;
+  z-index: 3;
+}
+
+/* Dekorasi kiri atas */
+.decoration.top-left {
+  position: absolute;
+  top: 0;
+  left: calc(-3vw);
+  /* geser ke kiri sejauh padding */
+  width: 200px;
+  /* sama seperti top-right */
+  height: 200px;
+  background: url('{{ asset("assets/images/page1_3/asset1_3.5.png") }}') center/contain no-repeat;
+  z-index: 3;
+}
+
+/* Dekorasi kiri atas */
+.decoration_2 {
+  position: absolute;
+  top: -2px;
+  right: 0px;
+  width: 100px;
+  height: 100px;
+  background: url('{{ asset("assets/images/page1_3/asset1_3.7.png") }}') center/contain no-repeat;
+  pointer-events: none;
+  z-index: 2;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+
+
 /* Responsive */
 @media (max-width: 1024px) {
   .hero-text h1 {
@@ -264,15 +363,27 @@
     margin-bottom: 40px;
   }
 
+  .sources {
+    padding: 60px 5vw 80px;
+  }
 
+  .sources-title {
+    font-size: 1.75rem;
+    margin-bottom: 24px;
+  }
+
+  .source-card {
+    padding: 20px 12px;
+  }
 
 }
 </style>
 @endpush
 
 @section('content')
+<div class="ellipse top-right"></div>
 <section class="hero">
-  <div class="ellipse top-right"></div>
+
   <div class="hero-text">
     <div class="subtitle">Calculator Karbon</div>
     <h1>Hitung Jejak Karbon<br>Kendaraanmu Sekarang</h1>
@@ -306,4 +417,42 @@
     </div>
   </div>
 </section>
+
+<section class="sources">
+  <div class="decoration top-right"></div>
+  <div class="decoration top-left"></div>
+  <h2 class="sources-title">Kenali Sumber Jejak Karbonmu</h2>
+  <div class="sources-grid">
+    <div class="source-card">
+      <div class="decoration_2 "></div>
+      <div class="source-icon" style="background-image:url('{{ asset('assets/images/page1_3/asset1_3.1.png') }}')">
+      </div>
+      <h3>Transportasi Darat</h3>
+      <p>Emisi dari kendaraan pribadi seperti motor dan mobil yang digunakan sehari-hari.</p>
+    </div>
+    <div class="source-card">
+      <div class="decoration_2 "></div>
+
+      <div class="source-icon" style="background-image:url('{{ asset('assets/images/page1_3/asset1_3.2.png') }}')">
+      </div>
+      <h3>Transportasi Udara</h3>
+      <p>Penerbangan menyumbang emisi tinggi per perjalanan, terutama jarak jauh.</p>
+    </div>
+    <div class="source-card">
+      <div class="decoration_2 "></div>
+      <div class="source-icon" style="background-image:url('{{ asset('assets/images/page1_3/asset1_3.3.png') }}')">
+      </div>
+      <h3>Transportasi Laut</h3>
+      <p>Perjalanan menggunakan kapal menghasilkan karbon, terutama untuk jarak jauh.</p>
+    </div>
+    <div class="source-card">
+      <div class="decoration_2 "></div>
+      <div class="source-icon" style="background-image:url('{{ asset('assets/images/page1_3/asset1_3.4.png') }}')">
+      </div>
+      <h3>Peralatan Rumah Tangga</h3>
+      <p>Penggunaan listrik dari alat-alat rumah seperti AC, kulkas, dan elektronik lainnya.</p>
+    </div>
+  </div>
+</section>
+
 @endsection
