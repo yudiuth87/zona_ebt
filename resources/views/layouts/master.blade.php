@@ -7,6 +7,7 @@
   <title>@yield('title', 'PPSDM')</title>
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <style>
   /* Atur tinggi minimum, biar footer bisa muncul setelah konten */
