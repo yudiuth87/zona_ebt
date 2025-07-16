@@ -202,6 +202,40 @@ body {
 .btn-submit:hover {
   background: #6bb13b;
 }
+.select-group select, .select-group input[type="text"], .select-group input[type="number"] {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 7px;
+  border: 1px solid #EAEAEA;
+  background: #F8F8F8;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.select-group {
+  margin-bottom: 12px;
+}
+.select-group label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #222;
+  display: block;
+}
+.select-group .input-suffix {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.select-group .input-suffix input {
+  flex: 1;
+}
+.select-group .input-suffix span {
+  font-size: 13px;
+  color: #888;
+  background: #F3F3F3;
+  border-radius: 4px;
+  padding: 2px 8px;
+}
 @media (max-width: 600px) {
   .calculator-wrapper { padding: 18px 2vw; }
   .tabs { flex-direction: column; gap: 8px; }
@@ -233,7 +267,78 @@ body {
   <hr class="divider">
   <div style="font-size:15px;font-weight:600;text-align:center;margin-bottom:10px;">Masukan Informasi Perjalanan Untuk Menghitung Estimasi Emisi Karbonmu</div>
   <form id="carbonForm" onsubmit="return false;">
-    <div class="input-row">
+    <div id="input-rumah-group" style="display:none;">
+      <div class="select-group">
+        <label for="lokasi">Lokasi</label>
+        <select id="lokasi">
+          <option value="">Pilih Lokasi</option>
+          <option value="Sumatera">Sumatera</option>
+          <option value="Jawa">Jawa</option>
+          <option value="Kalimantan">Kalimantan</option>
+          <option value="Sulawesi">Sulawesi</option>
+          <option value="Papua">Papua</option>
+        </select>
+      </div>
+      <div class="select-group">
+        <label for="output_solar">Output Solar PV</label>
+        <div class="input-suffix">
+          <input type="number" id="output_solar" placeholder="Contoh: 1000">
+          <span>kWh/Wp</span>
+        </div>
+      </div>
+      <div class="select-group">
+        <label for="golongan_tarif">Golongan Tarif</label>
+        <select id="golongan_tarif">
+          <option value="">Pilih Golongan Tarif</option>
+          <option value="R-1">R-1</option>
+          <option value="R-2">R-2</option>
+          <option value="R-3">R-3</option>
+          <option value="B-2">B-2</option>
+        </select>
+      </div>
+      <div class="select-group">
+        <label for="daya_pln">Daya Terpasang PLN</label>
+        <select id="daya_pln">
+          <option value="">Pilih Daya Terpasang PLN</option>
+          <option value="450">450 VA</option>
+          <option value="900">900 VA</option>
+          <option value="1300">1300 VA</option>
+          <option value="2200">2200 VA</option>
+          <option value="3500">3500 VA</option>
+        </select>
+      </div>
+      <div class="select-group">
+        <label for="tipe">Tipe</label>
+        <select id="tipe">
+          <option value="VA">VA</option>
+          <option value="Wp">Wp</option>
+        </select>
+      </div>
+      <div class="select-group">
+        <label for="tagihan">Tagihan Rata - Rata (bulanan)</label>
+        <div class="input-suffix">
+          <input type="number" id="tagihan" placeholder="Contoh: 500000">
+          <span>kWh</span>
+        </div>
+      </div>
+      <div class="select-group">
+        <label for="tipe_modul">Tipe Modul</label>
+        <select id="tipe_modul">
+          <option value="">Pilih Tipe Modul</option>
+          <option value="Mono">Mono</option>
+          <option value="Poly">Poly</option>
+        </select>
+      </div>
+      <div class="select-group">
+        <label for="jenis_kalkulator">Jenis Kalkulator</label>
+        <select id="jenis_kalkulator">
+          <option value="">Pilih Jenis Kalkulator</option>
+          <option value="PLN">PLN</option>
+          <option value="Mandiri">Mandiri</option>
+        </select>
+      </div>
+    </div>
+    <div class="input-row" id="input-transportasi-group">
       <div class="input-group" id="input-jarak">
         <label class="input-label" for="jarak">Jarak Tempuh (km)</label>
         <input type="number" id="jarak" placeholder="Contoh: 50">
@@ -429,6 +534,8 @@ function updateInputFields() {
     document.getElementById('input-jumlah-alat').style.display = '';
     document.getElementById('input-durasi').style.display = '';
     document.getElementById('label-emisi').innerText = 'Emisi/kWh (kg CO2 e)';
+    document.getElementById('input-rumah-group').style.display = '';
+    document.getElementById('input-transportasi-group').style.display = 'none';
   } else {
     document.getElementById('input-jarak').style.display = '';
     document.getElementById('input-penumpang').style.display = '';
@@ -436,19 +543,17 @@ function updateInputFields() {
     document.getElementById('input-jumlah-alat').style.display = 'none';
     document.getElementById('input-durasi').style.display = 'none';
     document.getElementById('label-emisi').innerText = 'Emisi/km (kg CO2 e)';
+    document.getElementById('input-rumah-group').style.display = 'none';
+    document.getElementById('input-transportasi-group').style.display = '';
   }
 }
 
 function calculateTotalEmission() {
   if(currentTransport === 'rumah') {
-    const daya = parseFloat(document.getElementById('daya').value) || 0;
-    const jumlah = parseFloat(document.getElementById('jumlah_alat').value) || 1;
-    const durasi = parseFloat(document.getElementById('durasi').value) || 0;
-    const frekuensi = parseFloat(document.getElementById('frekuensi').value) || 1;
-    const emisiPerKwh = parseFloat(document.getElementById('emisi_per_km').value) || 0;
-    // Daya (Watt) x jumlah alat x durasi (jam/hari) x frekuensi (hari) => kWh
-    const totalKwh = (daya * jumlah * durasi * frekuensi) / 1000;
-    const total = totalKwh * emisiPerKwh;
+    // Contoh rumus: emisi = output_solar * faktor_emisi (misal 0.85)
+    const output = parseFloat(document.getElementById('output_solar').value) || 0;
+    const faktor = 0.85; // bisa diubah sesuai kebutuhan
+    const total = output * faktor;
     document.getElementById('total_emisi').value = total.toFixed(2);
     document.getElementById('resultEmisi').innerText = (total/1000).toFixed(2) + ' ton CO2e';
     let offset = Math.round((total/1000) * 190000);
@@ -495,6 +600,11 @@ document.addEventListener('DOMContentLoaded', function() {
   ['jarak','penumpang','frekuensi','daya','jumlah_alat','durasi'].forEach(id => {
     const el = document.getElementById(id);
     if(el) el.addEventListener('input', calculateTotalEmission);
+  });
+  ['output_solar','lokasi','golongan_tarif','daya_pln','tipe','tagihan','tipe_modul','jenis_kalkulator'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('input', calculateTotalEmission);
+    if(el && el.tagName === 'SELECT') el.addEventListener('change', calculateTotalEmission);
   });
   updateInputFields();
   renderVehicleAndFuel();
