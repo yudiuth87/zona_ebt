@@ -134,6 +134,16 @@ body {
   gap: 12px;
   margin-bottom: 12px;
 }
+.error-msg {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  display: none;
+}
+.input-group input.invalid {
+  border-color: red;
+}
+
 .input-group {
   flex: 1;
   display: flex;
@@ -342,6 +352,7 @@ body {
       <div class="input-group" id="input-jarak">
         <label class="input-label" for="jarak">Jarak Tempuh (km)</label>
         <input type="number" id="jarak" placeholder="Contoh: 50">
+        <div class="error-msg" id="error-jarak"></div>
       </div>
       <div class="input-group" id="input-daya" style="display:none;">
         <label class="input-label" for="daya">Daya (Watt)</label>
@@ -350,6 +361,7 @@ body {
       <div class="input-group" id="input-penumpang">
         <label class="input-label" for="penumpang">Jumlah Penumpang</label>
         <input type="number" id="penumpang" placeholder="Contoh: 1">
+        <div class="error-msg" id="error-penumpang"></div>
       </div>
       <div class="input-group" id="input-jumlah-alat" style="display:none;">
         <label class="input-label" for="jumlah_alat">Jumlah Peralatan</label>
@@ -358,6 +370,7 @@ body {
       <div class="input-group" id="input-frekuensi">
         <label class="input-label" for="frekuensi">Frekuensi (Hari/Minggu)</label>
         <input type="number" id="frekuensi" placeholder="Contoh: 5">
+        <div class="error-msg" id="error-frekuensi"></div>
       </div>
       <div class="input-group" id="input-durasi" style="display:none;">
         <label class="input-label" for="durasi">Durasi Pemakaian (Jam/Hari)</label>
@@ -548,6 +561,26 @@ function updateInputFields() {
   }
 }
 
+function validatePositiveInput(id, label) {
+  const input = document.getElementById(id);
+  const errorDiv = document.getElementById(`error-${id}`);
+  const value = parseFloat(input.value);
+
+  if (isNaN(value) || value <= 0) {
+    input.classList.add('invalid');
+    errorDiv.innerText = 'Input tidak valid';
+    errorDiv.style.display = 'block';
+    return false;
+  } else {
+    input.classList.remove('invalid');
+    errorDiv.innerText = '';
+    errorDiv.style.display = 'none';
+    return true;
+  }
+}
+
+
+
 function calculateTotalEmission() {
   if(currentTransport === 'rumah') {
     // Contoh rumus: emisi = output_solar * faktor_emisi (misal 0.85)
@@ -599,7 +632,16 @@ document.addEventListener('DOMContentLoaded', function() {
   // Input listeners
   ['jarak','penumpang','frekuensi','daya','jumlah_alat','durasi'].forEach(id => {
     const el = document.getElementById(id);
-    if(el) el.addEventListener('input', calculateTotalEmission);
+    if(el) el.addEventListener('input', function () {
+      if (['jarak','penumpang','frekuensi'].includes(id)) {
+        if (parseFloat(this.value) <= 0) {
+          this.style.borderColor = 'red';
+        } else {
+          this.style.borderColor = '#EAEAEA';
+        }
+      }
+      calculateTotalEmission();
+    });
   });
   ['output_solar','lokasi','golongan_tarif','daya_pln','tipe','tagihan','tipe_modul','jenis_kalkulator'].forEach(id => {
     const el = document.getElementById(id);
@@ -609,8 +651,15 @@ document.addEventListener('DOMContentLoaded', function() {
   updateInputFields();
   renderVehicleAndFuel();
   document.querySelector('.btn-submit').addEventListener('click', function(e) {
-    e.preventDefault();
-    // Kumpulkan data
+  e.preventDefault();
+
+  const validJarak = validatePositiveInput('jarak', 'Jarak Tempuh');
+  const validPenumpang = validatePositiveInput('penumpang', 'Jumlah Penumpang');
+  const validFrekuensi = validatePositiveInput('frekuensi', 'Frekuensi');
+
+  if (!validJarak || !validPenumpang || !validFrekuensi) return;
+
+  // Kumpulkan data
     let jenis = currentTransport;
     let kendaraan = document.querySelector('#vehicleGrid .selection-card.selected')?.innerText.trim() || '';
     let bahan_bakar = document.querySelector('#fuelGrid .selection-card.selected')?.innerText.trim() || '';

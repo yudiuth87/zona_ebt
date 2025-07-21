@@ -59,10 +59,10 @@
         gap: 15px;
         margin-top: 15px;
     }
-    .social-icons a img {
-        width: 20px;
-        height: 20px;
+    .social-icons .bx {
+        color: white;
     }
+
     .komdigi-section {
         grid-column: 1 / -1;
         margin-top: 30px;
@@ -119,13 +119,13 @@
         <div class="footer-section">
             <h4>Layanan Kami</h4>
             <ul>
-                <li><a href="#">ZE News</a></li>
-                <li><a href="#">ZE Career</a></li>
-                <li><a href="#">ZE Affiliate</a></li>
-                <li><a href="#">ZE Data</a></li>
-                <li><a href="#">ZE Jobs</a></li>
-                <li><a href="#">ZE Academy</a></li>
-                <li><a href="#">Pedoman Media Siber</a></li>
+                <li><a href="https://zonaebt.com/news-media/">ZE News</a></li>
+                <li><a href="https://zonaebt.com/ze-career/">ZE Career</a></li>
+                <li><a href="https://zonaebt.com/ze-affiliate/">ZE Affiliate</a></li>
+                <li><a href="https://zonaebt.com/ze-data/">ZE Data</a></li>
+                <li><a href="https://zonaebt.com/green-jobs/">ZE Jobs</a></li>
+                <li><a href="https://zonaebt.com/category/event/">ZE Academy</a></li>
+                <li><a href="https://zonaebt.com/pedoman-pemberitaan-media-siber-2/">Pedoman Media Siber</a></li>
             </ul>
         </div>
         <div class="footer-section">
@@ -138,16 +138,16 @@
                 hello@zonaebt.com
             </p>
             <div class="social-icons">
-                <a href="#"><img src="{{ asset('assets/images/facebook-logo.png') }}" alt="Facebook"></a>
-                <a href="#"><img src="{{ asset('assets/images/instagram.png') }}" alt="Instagram"></a>
-                <a href="#"><img src="{{ asset('assets/images/whatsapp.png') }}" alt="Whatsapp"></a>
+                <a href="https://www.linkedin.com/company/zonaebt/"><i class="bx bx-md bxl-linkedin"></i></a>
+                <a href="https://www.instagram.com/zonaebt/"><i class='bx bx-md bxl-instagram'></i></i></a>
+                <a href="https://api.whatsapp.com/send/?phone=6282146020448&text&type=phone_number&app_absent=0"><i class='bx bx-md bxl-whatsapp'></i></a>
             </div>
         </div>
         <div class="footer-section">
             <h4>Bantuan</h4>
             <ul>
-                <li><a href="#">Syarat dan Ketentuan ZE Academy</a></li>
-                <li><a href="#">Syarat dan Ketentuan ZE Jobs</a></li>
+                <li><a href="https://zonaebt.com/syarat-dan-ketentuan-ze-academy/">Syarat dan Ketentuan ZE Academy</a></li>
+                <li><a href="https://zonaebt.com/syarat-ketentuan/">Syarat dan Ketentuan ZE Jobs</a></li>
             </ul>
         </div>
         <div class="komdigi-section">
