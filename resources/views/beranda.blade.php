@@ -3,6 +3,7 @@
 
 @push('styles')
 <style>
+
 /* Reset & box-sizing */
 *,
 *::before,
@@ -324,6 +325,110 @@ body {
   }
 }
 
+.infografik {
+  background-color: #FFFDE7;
+  padding: 80px 7vw;
+  font-family: 'Poppins', sans-serif;
+}
+
+.infografik-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.infografik-left {
+  flex: 1;
+  min-width: 300px;
+}
+
+.infografik-left h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1d1d1d;
+}
+
+.infografik-left p {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+
+.infografik-image-wrapper {
+  position: relative;
+  max-width: 100%;
+}
+
+.infografik-image {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.icon1 {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 48px;
+  height: 48px;
+}
+
+.icon2 {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 48px;
+  height: 48px;
+}
+
+.infografik-right {
+  flex: 1;
+  min-width: 300px;
+}
+
+.infografik-right h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #1a1a1a;
+}
+
+.infografik-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.infografik-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.infografik-steps li img {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.infografik-steps li strong {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.infografik-steps li p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 4px;
+}
+
+
+
 @media (max-width: 768px) {
   .hero {
     flex-direction: column;
@@ -374,11 +479,22 @@ body {
 
   .source-card {
     padding: 20px 12px;
-  }
-
 }
+
+  @media (max-width: 768px) {
+    .infografik-container {
+      flex-direction: column;
+    }
+
+    .infografik-left,
+    .infografik-right {
+      width: 100%;
+    }
+  }
 </style>
 @endpush
+
+
 
 @section('content')
 <div class="ellipse top-right"></div>
@@ -452,6 +568,128 @@ body {
       <h3>Peralatan Rumah Tangga</h3>
       <p>Penggunaan listrik dari alat-alat rumah seperti AC, kulkas, dan elektronik lainnya.</p>
     </div>
+  </div>
+</section>
+<section style="background-color: #fefee6; padding: 60px 7vw; font-family: 'Poppins', sans-serif;">
+  <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center;">
+    
+    <!-- KIRI -->
+    <div style="flex: 1 1 400px; max-width: 500px;">
+      <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; color: #1a1a1a;">
+        5 Langkah Infografik Kalkulator Karbon
+      </h2>
+      <p style="font-size: 1rem; color: #555; margin-bottom: 24px;">
+        Yuk mulai sekarang! Setiap langkah kecilmu berarti untuk masa depan bumi.
+      </p>
+      <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 16px rgba(0,0,0,0.1);">
+        <img src="{{ asset('assets/images/infografik/windfarm.png') }}" alt="Infografik" style="width: 100%; height: auto; display: block;">
+        <!-- Ikon overlay kiri atas -->
+        <img src="{{ asset('assets/images/infografik/ikon1.png') }}" alt="icon1" style="position: absolute; top: 16px; left: 16px; width: 48px;">
+        <!-- Ikon overlay kanan bawah -->
+        <img src="{{ asset('assets/images/infografik/ikon2.png') }}" alt="icon2" style="position: absolute; bottom: 16px; right: 16px; width: 48px;">
+      </div>
+    </div>
+
+    <!-- KANAN -->
+    <div style="flex: 1 1 400px; max-width: 500px;">
+      <h3 style="font-weight: 600; font-size: 1.2rem; margin-bottom: 20px;">Langkah-langkah :</h3>
+      <ul style="display: flex; flex-direction: column; gap: 20px; padding: 0; margin: 0;">
+        @php
+          $steps = [
+            ['ikon' => 'step1.png', 'judul' => 'Pilih Kendaraan & Hitung Emisi', 'desc' => 'Tentukan jenis kendaraan, bahan bakar, dan frekuensi penggunaan.'],
+            ['ikon' => 'step2.png', 'judul' => 'Pilih Proyek Offset', 'desc' => 'Pilih lokasi dan jenis penanaman pohon untuk menebus emisi Anda.'],
+            ['ikon' => 'step3.png', 'judul' => 'Isi Data Diri', 'desc' => 'Masukkan nama dan kontak untuk proses donasi.'],
+            ['ikon' => 'step4.png', 'judul' => 'Konfirmasi Pembayaran', 'desc' => 'Cek ringkasan, lalu selesaikan transaksi dengan mudah dan aman.'],
+            ['ikon' => 'step5.png', 'judul' => 'Terima kasih Sudah Berkontribusi!', 'desc' => 'Akses kalkulator untuk menghitung emisi karbon harian Anda.'],
+          ];
+        @endphp
+
+        @foreach($steps as $step)
+        <li style="display: flex; align-items: flex-start; gap: 16px;">
+          <img src="{{ asset('assets/images/infografik/' . $step['ikon']) }}" alt="ikon" style="width: 42px; height: 42px;">
+          <div>
+            <p style="margin: 0; font-weight: 600;">{{ $step['judul'] }}</p>
+            <p style="margin: 4px 0 0; font-size: 0.95rem; color: #555;">{{ $step['desc'] }}</p>
+          </div>
+        </li>
+        @endforeach
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script src="//unpkg.com/alpinejs" defer></script>
+
+<section class="offset-section" style="padding: 60px 7vw; background: #fff;">
+  <h2 style="text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 40px; font-family: 'Poppins', sans-serif;">
+    Kegiatan Karbon Offset
+  </h2>
+
+  @php
+    $cards = [
+      [
+        'judul' => 'Reforestasi Hutan',
+        'lokasi' => 'Sumatera',
+        'gambar' => 'Reforestasi.jpeg',
+        'deskripsi' => 'Proyek ini bertujuan untuk memulihkan hutan tropis di wilayah Sumatera dengan penanaman pohon dan konservasi tanah untuk menyerap emisi karbon secara alami.',
+      ],
+      [
+        'judul' => 'Pengelolaan Lahan Berkelanjutan',
+        'lokasi' => 'Jawa Barat',
+        'gambar' => 'Pengelolaan Lahan.jpeg',
+        'deskripsi' => 'Program ini mengoptimalkan penggunaan lahan pertanian dengan teknik ramah lingkungan seperti pertanian organik, rotasi tanaman, dan konservasi air untuk menyerap karbon.',
+      ],
+      [
+        'judul' => 'Proyek Energi Terbarukan',
+        'lokasi' => 'NTT',
+        'gambar' => 'Energi Terbarukan.jpeg',
+        'deskripsi' => 'Proyek ini menyediakan solusi energi bersih seperti tenaga surya dan angin untuk menggantikan bahan bakar fosil dan mengurangi emisi karbon.',
+      ],
+    ];
+  @endphp
+
+  <div 
+    class="offset-cards" 
+    x-data="{ openCard: null }"
+    style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center;"
+  >
+    @foreach ($cards as $index => $card)
+    <div 
+      style="width: 300px; font-family: 'Poppins', sans-serif; background: #fff; border-radius: 16px; box-shadow: 0 6px 12px rgba(0,0,0,0.1); overflow: hidden; transition: all 0.3s;"
+    >
+      <!-- Gambar dan Judul -->
+      <div style="position: relative;">
+        <img 
+          src="{{ asset('assets/images/infografik/' . $card['gambar']) }}" 
+          alt="{{ $card['judul'] }}" 
+          style="width: 100%; height: 250px; object-fit: cover;"
+        >
+        <div style="position: absolute; top: 0; left: 0; padding: 16px; color: white; background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0)); width: 100%;">
+          <p style="font-weight: 700; font-size: 1rem; margin-bottom: 4px;">{{ $card['judul'] }}</p>
+          <p style="font-size: 0.85rem;">Lokasi: {{ $card['lokasi'] }}</p>
+        </div>
+      </div>
+
+      <!-- Tombol Lihat/Tutup -->
+      <div style="padding: 16px; text-align: center;">
+        <button 
+          @click="openCard === {{ $index }} ? openCard = null : openCard = {{ $index }}"
+          style="width: 100%; background: #f4f4f4; padding: 12px; border-radius: 24px; font-weight: 600; color: #000; border: 2px solid #000;">
+          <span x-text="openCard === {{ $index }} ? 'Tutup Detail' : 'Lihat Detail'"></span>
+        </button>
+      </div>
+
+      <!-- Detail Konten Expand -->
+      <div 
+        x-show="openCard === {{ $index }}" 
+        x-transition 
+        style="padding: 16px; background: #f9f9f9; font-size: 0.95rem; color: #333;"
+      >
+        <p style="margin-bottom: 8px;">{{ $card['deskripsi'] }}</p>
+        <p><strong>Lokasi:</strong> {{ $card['lokasi'] }}</p>
+      </div>
+    </div>
+    @endforeach
   </div>
 </section>
 
