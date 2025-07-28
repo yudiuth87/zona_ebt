@@ -52,4 +52,42 @@ class OffsetController extends Controller
         $request->session()->put('offset_data', $result);
         return response()->json(['success' => true]);
     }
+public function showFormDataDiri(Request $request)
+    {
+        // Ambil data dari session atau parameter
+        $data = [
+            'total_emisi' => $request->get('total_emisi', session('offset_data.total_emisi', 0)),
+            'biaya_offset' => $request->get('biaya_offset', session('offset_data.biaya_offset', 50000)),
+            'jenis_kendaraan' => $request->get('jenis_kendaraan', session('offset_data.jenis_kendaraan', '')),
+            'jarak' => $request->get('jarak', session('offset_data.jarak', 0)),
+            'penumpang' => $request->get('penumpang', session('offset_data.penumpang', 0)),
+            'frekuensi' => $request->get('frekuensi', session('offset_data.frekuensi', '')),
+            'bahan_bakar' => $request->get('bahan_bakar', session('offset_data.bahan_bakar', '')),
+            'lokasi_terpilih' => $request->get('lokasi_terpilih', session('offset_data.lokasi_terpilih', 'Proyek Mangrove di Teluk Benoa Bali'))
+        ];
+
+        return view('form-data-diri', $data);
+    }
+
+    public function submitDataDiri(Request $request)
+    {
+        // Validasi form
+        $validated = $request->validate([
+            'nama_perusahaan' => 'nullable|string|max:255',
+            'email' => 'required|email|max:255',
+            'nama_lengkap' => 'required|string|max:255',
+            'nomor_hp' => 'required|string|max:20',
+            'total_emisi' => 'required|numeric',
+            'biaya_offset' => 'required|numeric',
+            'lokasi_terpilih' => 'required|string'
+        ]);
+
+        // Simpan data ke session
+        session([
+            'form_data' => $validated
+        ]);
+
+        // Redirect ke payment
+        return redirect()->route('bayar.offset')->with('success', 'Data berhasil disimpan');
+    }
 } 
