@@ -9,7 +9,7 @@
   background: #fff;
   border-radius: 18px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
-  padding: 32px 24px 24px 24px;
+  padding: 32px 24px 24px;
 }
 
 .offset-title {
@@ -26,12 +26,81 @@
   margin-bottom: 24px;
 }
 
+/* Lokasi Cards */
+#lokasiCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.lokasi-card {
+  background: #fafafa;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.lokasi-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.lokasi-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.lokasi-card-body {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.lokasi-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 8px;
+}
+
+.lokasi-card-desc {
+  font-size: 14px;
+  color: #555;
+  flex: 1;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.lokasi-card-btn {
+  background: #7AC142;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.lokasi-card-btn:hover {
+  background: #6bb13b;
+}
+
+/* Summary & Detail unchanged */
 .offset-summary,
 .offset-detail {
   background: #fff;
   border: 1.5px solid #EAEAEA;
   border-radius: 12px;
-  padding: 18px 20px 10px 20px;
+  padding: 18px 20px 10px;
   margin-bottom: 18px;
 }
 
@@ -62,7 +131,7 @@
   text-align: center;
   font-size: 18px;
   font-weight: 700;
-  margin: 24px 0 18px 0;
+  margin: 24px 0 18px;
 }
 
 .offset-btn {
@@ -91,13 +160,13 @@
   <div class="offset-title">Cari Lokasi Carbon Offsetmu</div>
   <div class="offset-subtitle">Pilih lokasi terbaik untuk melakukan aksi penanaman pohon sebagai upaya mengimbangi jejak
     karbon Anda. Setiap lokasi membawa dampak nyata bagi lingkungan.</div>
-  <div style="margin-bottom:32px;">
+  <div style="margin-bottom:24px;">
     <input type="text" id="searchLokasi" placeholder="Cari Lokasi Penanaman"
-      style="width:100%;padding:8px 12px;border-radius:8px;border:1.5px solid #EAEAEA;font-size:15px;margin-bottom:18px;">
-    <div id="lokasiCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;"></div>
+      style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid #ddd;font-size:15px;">
   </div>
+  <div id="lokasiCards"></div>
 
-  <div class="offset-title">Lokasi Offset</div>
+  <div class="offset-title" style="margin-top:32px;">Lokasi Offset</div>
   <div class="offset-total">Total Emisi : {{ number_format($total_emisi ?? 0, 2, ',', '.') }} Kg CO2</div>
 
   <div class="offset-summary">
@@ -159,72 +228,60 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('[offset] script berjalan'); // cek apakah script dimuat
   const lokasiList = [{
       nama: 'Sertifikat PLTM Gunung Wugul',
       gambar: '/assets/images/lokasiCarbon/gambar-1.jpg',
-      deskripsi: 'PLTM Gunung Wugul adalah pembangkit listrik tenaga mini-hidro dengan kapasitas total 3 MW (2 x 1,5 MW) yang berlokasi di Banjarnegara, Jawa Tengah. Proyek ini merupakan inisiatif energi bersih yang memanfaatkan aliran Sungai Urang untuk menghasilkan listrik terbarukan.',
-      detail: 'Sertifikat (REC) Renewable Energy Certificate PLTMG'
+      deskripsi: 'PLTM Gunung Wugul adalah pembangkit listrik tenaga mini-hidro dengan kapasitas total 3 MW'
     },
     {
       nama: 'Proyek Mangrove di Teluk Benoa Bali',
       gambar: '/assets/images/lokasiCarbon/gambar-2.webp',
-      deskripsi: 'Teluk Benoa, Bali adalah kawasan kaya biodiversitas dengan hutan bakau, terumbu karang, dan padang lamun. Meski menghadapi reklamasi dan polusi, wilayah ini berperan penting sebagai penyerap karbon, penyaring polutan, dan pelindung alami dari abrasi dan tsunami.',
-      detail: 'Menanam Pohon Mangrove di Teluk Benoa Bali'
+      deskripsi: 'Teluk Benoa, Bali adalah kawasan kaya biodiversitas dengan hutan bakau'
     },
     {
-      nama: 'Sertifikat (REC) Renewable Energy Certificate zonaebt',
+      nama: 'REC Zonaebt',
       gambar: '/assets/images/lokasiCarbon/gambar-3.webp',
-      deskripsi: '"Sertifikat (REC) Renewable Energy Certificate Zonaebt adalah sertifikat digital yang membuktikan kepemilikan atas energi terbarukan (renewable energy) yang dihasilkan dari sumber-sumber ramah lingkungan seperti tenaga Panas Bumi/Geothermal. 1 REC setara dengan 1 MWh (Megawatt-hour).',
-      detail: 'Sertifikat (REC) Renewable Energy Certificate SGE'
+      deskripsi: 'Sertifikat digital pembuktian kepemilikan energi terbarukan'
     },
     {
-      nama: 'Sertifikat (REC) Renewable Energy Certificate Geothermal',
+      nama: 'REC Geothermal',
       gambar: '/assets/images/lokasiCarbon/gambar-4.webp',
-      deskripsi: 'Sertifikat (REC) Renewable Energy Certificate ZonaEBT adalah sertifikat digital yang membuktikan kepemilikan atas energi terbarukan (renewable energy) yang dihasilkan dari sumber-sumber ramah lingkungan seperti tenaga surya, angin, hidro, atau biomassa. 1 REC setara dengan 1 MWh (Megawatt-hour) listrik hijau yang disuntikkan ke dalam grid.',
-      detail: 'Sertifikat (REC) Renewable Energy Certificate Geothermal'
-    },
+      deskripsi: 'Sertifikat energi ramah lingkungan seperti surya, angin, hidro'
+    }
   ];
 
-  function renderLokasiCards(filteredList = lokasiList) {
-    console.log('[offset] renderLokasiCards, count:', filteredList.length);
-    const lokasiCards = document.getElementById('lokasiCards');
-    lokasiCards.innerHTML = '';
-    if (filteredList.length === 0) {
-      lokasiCards.innerHTML =
-        '<div style="grid-column:1 / -1; text-align:center; color:#999;">Tidak ada lokasi ditemukan</div>';
+  function renderLokasiCards(list) {
+    const container = document.getElementById('lokasiCards');
+    container.innerHTML = '';
+    if (!list.length) {
+      container.innerHTML = '<p style="text-align:center;color:#999;">Tidak ada lokasi ditemukan</p>';
       return;
     }
-    filteredList.forEach((lokasi, idx) => {
+    list.forEach((lokasi, idx) => {
       const card = document.createElement('div');
-      // … styling card seperti semula …
+      card.className = 'lokasi-card';
       card.innerHTML = `
-          <img src="${lokasi.gambar}" alt="${lokasi.nama}" style="width:100%;height:120px;object-fit:cover;">
-          <div style="padding:12px;flex:1;">
-            <div style="font-weight:700;font-size:15px;">${lokasi.nama}</div>
-            <div style="font-size:13px;color:#666;">${lokasi.deskripsi}</div>
-          </div>
-          <button class="offset-btn-lokasi" data-idx="${idx}" style="margin:12px;background:#7AC142;color:#fff;cursor:pointer;">Pilih Lokasi</button>
-        `;
-      lokasiCards.appendChild(card);
+        <img src="${lokasi.gambar}" alt="${lokasi.nama}">
+        <div class="lokasi-card-body">
+          <div class="lokasi-card-title">${lokasi.nama}</div>
+          <div class="lokasi-card-desc">${lokasi.deskripsi}</div>
+          <button class="lokasi-card-btn" data-idx="${idx}">Pilih Lokasi</button>
+        </div>
+      `;
+      container.appendChild(card);
     });
-
-    document.querySelectorAll('.offset-btn-lokasi').forEach(btn => {
+    document.querySelectorAll('.lokasi-card-btn').forEach(btn => {
       btn.addEventListener('click', function() {
-        const idx = this.dataset.idx;
-        document.getElementById('lokasiTerpilih').innerText = lokasiList[idx].nama;
+        document.getElementById('lokasiTerpilih').innerText = lokasiList[this.dataset.idx].nama;
       });
     });
   }
 
-  // Cari lokasi
-  document.getElementById('searchLokasi').addEventListener('input', function() {
-    const keyword = this.value.toLowerCase();
+  document.getElementById('searchLokasi').addEventListener('input', function(e) {
+    const keyword = e.target.value.toLowerCase();
     renderLokasiCards(lokasiList.filter(l => l.nama.toLowerCase().includes(keyword)));
   });
 
-  // Tombol Tebus Sekarang
-  // Tombol Tebus Sekarang
   document.querySelector('.offset-btn').addEventListener('click', function() {
     const params = new URLSearchParams({
       total_emisi: @json($total_emisi ?? 0),
@@ -234,13 +291,12 @@ document.addEventListener('DOMContentLoaded', function() {
       penumpang: @json($penumpang ?? 1),
       frekuensi: @json($frekuensi ?? 1),
       bahan_bakar: @json($bahan_bakar ?? ''),
-      lokasi_terpilih: @json($lokasi_terpilih ?? 'Proyek Mangrove di Teluk Benoa Bali')
+      lokasi_terpilih: document.getElementById('lokasiTerpilih').innerText
     });
     window.location.href = '/form-data-diri?' + params.toString();
   });
 
-  // Inisialisasi
-  renderLokasiCards();
+  renderLokasiCards(lokasiList);
 });
 </script>
 @endpush
