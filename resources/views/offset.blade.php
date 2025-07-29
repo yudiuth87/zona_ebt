@@ -283,6 +283,14 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   document.querySelector('.offset-btn').addEventListener('click', function() {
+    const selectedName = document.getElementById('lokasiTerpilih').innerText;
+    const selectedCard = [...document.querySelectorAll('.lokasi-card')].find(c =>
+      c.querySelector('.lokasi-card-title').innerText.trim() === selectedName
+    );
+    const selectedGambar = selectedCard ?
+      selectedCard.querySelector('img').getAttribute('src') :
+      '/assets/images/lokasiCarbon/gambar-2.webp';
+
     const params = new URLSearchParams({
       total_emisi: @json($total_emisi ?? 0),
       biaya_offset: @json($biaya_offset ?? 0),
@@ -291,7 +299,8 @@ document.addEventListener('DOMContentLoaded', function() {
       penumpang: @json($penumpang ?? 1),
       frekuensi: @json($frekuensi ?? 1),
       bahan_bakar: @json($bahan_bakar ?? ''),
-      lokasi_terpilih: document.getElementById('lokasiTerpilih').innerText
+      lokasi_terpilih: selectedName,
+      lokasi_gambar: selectedGambar // <<< baru
     });
     window.location.href = '/form-data-diri?' + params.toString();
   });

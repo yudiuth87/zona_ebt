@@ -306,10 +306,11 @@
       @csrf
 
       <!-- Hidden fields untuk data emisi -->
-      <input type="hidden" name="total_emisi" value="{{ $total_emisi ?? 0 }}">
-      <input type="hidden" name="biaya_offset" value="{{ $biaya_offset ?? 0 }}">
-      <input type="hidden" name="lokasi_terpilih"
-        value="{{ $lokasi_terpilih ?? 'Proyek Mangrove di Teluk Benoa Bali' }}">
+      <input type="hidden" name="lokasi_terpilih" value="{{ $lokasi_terpilih }}">
+      <input type="hidden" name="lokasi_gambar" value="{{ $lokasi_gambar }}">
+      <input type="hidden" name="bahan_bakar" value="{{ $bahan_bakar }}">
+      <input type="hidden" name="total_emisi" value="{{ $total_emisi }}">
+      <input type="hidden" name="biaya_offset" value="{{ $biaya_offset }}">
 
       <!-- Nama Perusahaan -->
       <div class="form-group">

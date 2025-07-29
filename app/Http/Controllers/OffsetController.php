@@ -49,7 +49,13 @@ class OffsetController extends Controller
         }
         $result['biaya_offset'] = round(($result['total_emisi']/1000) * 190000);
         // Simpan ke session
-        $request->session()->put('offset_data', $result);
+      // Tambahkan lokasi_terpilih dan gambar ke offset_data
+$result['lokasi_terpilih'] = $input['lokasi_terpilih'] ?? 'Proyek Mangrove di Teluk Benoa Bali';
+// (opsional) simpan path gambarnya juga
+$result['lokasi_gambar']    = $input['lokasi_gambar'] ?? '/assets/images/lokasiCarbon/gambar-2.webp';
+
+$request->session()->put('offset_data', $result);
+
         return response()->json(['success' => true]);
     }
 public function showFormDataDiri(Request $request)
@@ -63,7 +69,9 @@ public function showFormDataDiri(Request $request)
             'penumpang' => $request->get('penumpang', session('offset_data.penumpang', 0)),
             'frekuensi' => $request->get('frekuensi', session('offset_data.frekuensi', '')),
             'bahan_bakar' => $request->get('bahan_bakar', session('offset_data.bahan_bakar', '')),
-            'lokasi_terpilih' => $request->get('lokasi_terpilih', session('offset_data.lokasi_terpilih', 'Proyek Mangrove di Teluk Benoa Bali'))
+            'lokasi_terpilih' => $request->get('lokasi_terpilih', session('offset_data.lokasi_terpilih', 'Proyek Mangrove di Teluk Benoa Bali')),
+            'lokasi_gambar'   => $request->get('lokasi_gambar', session('offset_data.lokasi_gambar', '/assets/images/lokasiCarbon/gambar-2.webp')),
+        // default gambar kalau nggak ada
         ];
 
         return view('form-data-diri', $data);
@@ -79,15 +87,13 @@ public function showFormDataDiri(Request $request)
             'nomor_hp' => 'required|string|max:20',
             'total_emisi' => 'required|numeric',
             'biaya_offset' => 'required|numeric',
-            'lokasi_terpilih' => 'required|string'
+            'lokasi_terpilih' => 'required|string',
+            'lokasi_gambar' => 'required|string',
+            'bahan_bakar' => 'required|string',
         ]);
 
         // Simpan data ke session
-        session([
-            'form_data' => $validated
-        ]);
-
-        // Redirect ke payment
-        return redirect()->route('bayar.offset')->with('success', 'Data berhasil disimpan');
+     session(['form_data' => $validated]);
+     return redirect()->route('payment.confirmation');
     }
 } 
