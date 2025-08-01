@@ -43,18 +43,18 @@ class OffsetController extends Controller
             $penumpang = $input['penumpang'] ?? 1;
             $frekuensi = $input['frekuensi'] ?? 1;
             $emisiPerKm = $input['emisi_per_km'] ?? 0;
-            $total = $jarak * $emisiPerKm * $frekuensi;
-            $total = $total / ($penumpang ?: 1);
+            $total = $jarak * $emisiPerKm * $frekuensi * $penumpang;
             $result['total_emisi'] = $total;
         }
-        $result['biaya_offset'] = round(($result['total_emisi']/1000) * 190000);
+        $result['biaya_offset'] = ($result['total_emisi']) * 500;
+        
         // Simpan ke session
-      // Tambahkan lokasi_terpilih dan gambar ke offset_data
-$result['lokasi_terpilih'] = $input['lokasi_terpilih'] ?? 'Proyek Mangrove di Teluk Benoa Bali';
-// (opsional) simpan path gambarnya juga
-$result['lokasi_gambar']    = $input['lokasi_gambar'] ?? '/assets/images/lokasiCarbon/gambar-2.webp';
+        // Tambahkan lokasi_terpilih dan gambar ke offset_data
+        $result['lokasi_terpilih'] = $input['lokasi_terpilih'] ?? 'Proyek Mangrove di Teluk Benoa Bali';
+        // (opsional) simpan path gambarnya juga
+        $result['lokasi_gambar']    = $input['lokasi_gambar'] ?? '/assets/images/lokasiCarbon/gambar-2.webp';
 
-$request->session()->put('offset_data', $result);
+        $request->session()->put('offset_data', $result);
 
         return response()->json(['success' => true]);
     }

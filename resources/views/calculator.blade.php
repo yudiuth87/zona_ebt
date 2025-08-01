@@ -528,18 +528,23 @@ const transportasiData = {
       },
       {
         name: 'Electric'
+      },
+      {
+        name: 'Diesel'
+      },
+      {
+        name: 'Bensin (BBM)'
       }
     ],
     emissionFactors: {
       'Mobil': {
         'Pertalite': 0.17,
         'Pertamax': 0.18,
-        'Solar': 0.18,
+        'Diesel': 0.18,
         'Electric': 0.09
       },
       'Motor': {
-        'Pertalite': 0.05,
-        'Pertamax': 0.05
+        'Bensin (BBM)': 0.05
       },
       'Bus': {
         'Solar': 0.60
@@ -761,13 +766,13 @@ function calculateTotalEmission() {
   const penumpang = parseFloat(document.getElementById('penumpang').value) || 1;
   const frekuensi = parseFloat(document.getElementById('frekuensi').value) || 1;
   const emisiPerKm = parseFloat(document.getElementById('emisi_per_km').textContent) || 0;
-  let total = jarak * emisiPerKm * frekuensi;
-  if (currentTransport !== 'rumah') {
-    total = total / penumpang;
-  }
+  let total = jarak * emisiPerKm * frekuensi * penumpang;
+  // if (currentTransport !== 'rumah') {
+  //   total = total / penumpang;
+  // }
   document.getElementById('total_emisi').textContent = total.toFixed(2);
-  document.getElementById('resultEmisi').innerText = (total / 1000).toFixed(2) + ' ton CO2e';
-  let offset = Math.round((total / 1000) * 190000);
+  document.getElementById('resultEmisi').innerText = (total).toFixed(2) + ' ton CO2e';
+  let offset = Math.round(total * 500);
   document.getElementById('resultOffset').innerText = 'Rp. ' + offset.toLocaleString('id-ID');
 }
 
