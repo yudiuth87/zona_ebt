@@ -6,7 +6,30 @@ use App\Http\Controllers\OffsetController;
 use App\Http\Controllers\PaymentController;
 
 // Route yang kita pake
-Route::get('/', fn() => view('beranda'))->name('beranda');
+Route::get('/', function () {
+    $cards = [
+        [
+            'judul' => 'Reforestasi Hutan',
+            'lokasi' => 'Sumatera',
+            'gambar' => 'Reforestasi.jpeg',
+            'deskripsi' => 'Proyek ini bertujuan untuk memulihkan hutan tropis di wilayah Sumatera dengan penanaman pohon dan konservasi tanah untuk menyerap emisi karbon secara alami.',
+        ],
+        [
+            'judul' => 'Pengelolaan Lahan Berkelanjutan',
+            'lokasi' => 'Jawa Barat',
+            'gambar' => 'Pengelolaan Lahan.jpeg',
+            'deskripsi' => 'Program ini mengoptimalkan penggunaan lahan pertanian dengan teknik ramah lingkungan seperti pertanian organik, rotasi tanaman, dan konservasi air untuk menyerap karbon.',
+        ],
+        [
+            'judul' => 'Proyek Energi Terbarukan',
+            'lokasi' => 'NTT',
+            'gambar' => 'Energi Terbarukan.jpeg',
+            'deskripsi' => 'Proyek ini menyediakan solusi energi bersih seperti tenaga surya dan angin untuk menggantikan bahan bakar fosil dan mengurangi emisi karbon.',
+        ],
+    ];
+    return view('beranda', compact('cards')); // Pastikan 'cards' dilewatkan ke view
+})->name('beranda');
+
 Route::get('/kalkulator', fn() => view('calculator'))->name('kalkulator');
 Route::get('/tentang', [PublicTentangController::class, 'index'])->name('tentang');
 
@@ -41,14 +64,14 @@ Route::post('/offset/calculate', [OffsetController::class, 'calculate'])->name('
 Route::get('/form-data-diri', [OffsetController::class, 'showFormDataDiri'])->name('form-data-diri');
 Route::post('/form-data-diri', [OffsetController::class, 'showFormDataDiri'])->name('form-data-diri.post');
 Route::post('/submit-data-diri', [OffsetController::class, 'submitDataDiri'])
-     ->name('submit-data-diri');
+    ->name('submit-data-diri');
 
 // Payment route
 Route::post('/bayar-offset', [PaymentController::class, 'pay'])->name('bayar.offset');
 
 // setelah route bayar.offset
 Route::get('/konfirmasi-pembayaran', [PaymentController::class, 'showConfirmation'])
-     ->name('payment.confirmation');
+    ->name('payment.confirmation');
 
 // Kalkulator routes
 Route::get('/kalkulator/transportasi-darat', fn() => view('kalkulator.transportasi-darat'))->name('transportasi-darat');
