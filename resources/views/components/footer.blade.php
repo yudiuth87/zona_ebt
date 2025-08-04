@@ -7,7 +7,7 @@
   font-family: 'Poppins', sans-serif;
   position: relative;
   overflow: hidden;
-}
+} 
 
 /* Background Pattern (Subtle) */
 .footer-bg {
