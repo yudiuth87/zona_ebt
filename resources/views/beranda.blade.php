@@ -91,7 +91,7 @@
   position: absolute;
   width: 355px;
   height: 500px;
-  background: url('{{ asset("assets/images/page1_1/ellipse.png") }}') center/contain no-repeat;
+  background: url('{{ asset("assets/images/page1_1//ellipse.png") }}') center/contain no-repeat;
   pointer-events: none;
   opacity: 1;
   z-index: 3;
@@ -384,6 +384,9 @@ html,body {
   justify-content: center;
   max-width: 1200px;
   margin: 0 auto;
+  /* --- PERBAIKAN UTAMA DI SINI --- */
+  align-items: start; /* Mencegah item meregang secara vertikal */
+  /* ------------------------------- */
 }
 
 .offset-card {
@@ -462,6 +465,18 @@ html,body {
   color: #222;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(255, 224, 102, 0.3);
+}
+
+/* Style for the active (expanded) button */
+.offset-card-button.active {
+  background: #FFE066; /* Yellow background */
+  color: #222; /* Black text */
+  border-color: #FFE066; /* Yellow border */
+}
+
+.offset-card-button.active:hover {
+  background: #FFD700; /* Slightly darker yellow on hover */
+  box-shadow: 0 4px 8px rgba(255, 224, 102, 0.4);
 }
 
 .offset-card-detail {
@@ -693,34 +708,9 @@ html,body {
   <h2 class="offset-section-title">
     Kegiatan Karbon Offset
   </h2>
-  @php
-    $cards = [
-      [
-        'judul' => 'Reforestasi Hutan',
-        'lokasi' => 'Sumatera',
-        'gambar' => 'Reforestasi.jpeg',
-        'deskripsi' => 'Proyek ini bertujuan untuk memulihkan hutan tropis di wilayah Sumatera dengan penanaman pohon dan konservasi tanah untuk menyerap emisi karbon secara alami.',
-      ],
-      [
-        'judul' => 'Pengelolaan Lahan Berkelanjutan',
-        'lokasi' => 'Jawa Barat',
-        'gambar' => 'Pengelolaan Lahan.jpeg',
-        'deskripsi' => 'Program ini mengoptimalkan penggunaan lahan pertanian dengan teknik ramah lingkungan seperti pertanian organik, rotasi tanaman, dan konservasi air untuk menyerap karbon.',
-      ],
-      [
-        'judul' => 'Proyek Energi Terbarukan',
-        'lokasi' => 'NTT',
-        'gambar' => 'Energi Terbarukan.jpeg',
-        'deskripsi' => 'Proyek ini menyediakan solusi energi bersih seperti tenaga surya dan angin untuk menggantikan bahan bakar fosil dan mengurangi emisi karbon.',
-      ],
-    ];
-  @endphp
-  <div
-    class="offset-cards-grid"
-    x-data="{ openCard: null }"
-  >
+  <div class="offset-cards-grid">
     @foreach ($cards as $index => $card)
-    <div class="offset-card">
+    <div class="offset-card" x-data="{ isOpen: false }">
       <!-- Gambar dan Judul -->
       <div class="offset-card-image-wrapper">
         <img
@@ -736,15 +726,16 @@ html,body {
       <!-- Tombol Lihat/Tutup -->
       <div class="offset-card-button-wrapper">
         <button
-          @click="openCard === {{ $index }} ? openCard = null : openCard = {{ $index }}"
+          @click="isOpen = !isOpen"
           class="offset-card-button"
+          :class="{'active': isOpen}"
         >
-          <span x-text="openCard === {{ $index }} ? 'Tutup Detail' : 'Lihat Detail'"></span>
+          <span x-text="isOpen ? 'Tutup Detail' : 'Lihat Detail'"></span>
         </button>
       </div>
       <!-- Detail Konten Expand -->
       <div
-        x-show="openCard === {{ $index }}"
+        x-show="isOpen"
         x-transition
         class="offset-card-detail"
       >
