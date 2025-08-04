@@ -1215,7 +1215,7 @@ function calculateVehicleEmission(vehicleId) {
     vehicle.frekuensi = frekuensi;
     
     // Calculate emission for transportation
-    totalEmission = (jarak * emissionFactor * frekuensi) / penumpang;
+    totalEmission = jarak * emissionFactor * frekuensi * penumpang;
   }
   
   vehicle.emission = totalEmission;
@@ -1229,7 +1229,7 @@ function calculateVehicleEmission(vehicleId) {
   } else {
     // Tampilkan dengan 2 desimal untuk konsistensi
     document.getElementById(`resultEmisi_${vehicleId}`).textContent = totalEmission.toFixed(2) + ' kg CO₂';
-    const offset = Math.round(totalEmission * 500);
+    const offset = totalEmission * 500;
     document.getElementById(`resultOffset_${vehicleId}`).textContent = 'Rp. ' + offset.toLocaleString('id-ID');
   }
   
@@ -1251,7 +1251,7 @@ function calculateTotalEmissions() {
     }
   });
   
-  document.getElementById('totalEmission').textContent = (totalEmission / 1000).toFixed(2) + ' ton CO₂e';
+  document.getElementById('totalEmission').textContent = (totalEmission).toFixed(2) + ' ton CO₂e';
   document.getElementById('totalOffset').textContent = 'Rp. ' + totalOffset.toLocaleString('id-ID');
 }
 
