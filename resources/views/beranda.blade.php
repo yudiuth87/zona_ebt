@@ -3,11 +3,8 @@
 
 @push('styles')
 <style>
-
 /* Reset & box-sizing */
-*,
-*::before,
-*::after {
+*,*::before,*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -51,7 +48,6 @@
   font-family: 'Poppins';
   z-index: 3
 }
-
 .hero-text .subtitle {
   font-size: 14px;
   font-weight: 500;
@@ -61,14 +57,12 @@
   letter-spacing: 1px;
   z-index: 3;
 }
-
 .hero-text h1 {
   font-size: 3rem;
   font-weight: 450;
   line-height: 1.2;
   margin-bottom: 16px;
 }
-
 .hero-text p {
   font-size: 1rem;
   line-height: 1.6;
@@ -76,7 +70,6 @@
   margin-bottom: 32px;
   max-width: 480px;
 }
-
 .hero-text .btn-start {
   display: inline-block;
   padding: 12px 32px;
@@ -88,7 +81,6 @@
   text-decoration: none;
   transition: background .3s, transform .3s;
 }
-
 .hero-text .btn-start:hover {
   background-color: #5a7a1c;
   transform: translateY(-2px);
@@ -104,20 +96,17 @@
   opacity: 1;
   z-index: 3;
 }
-
 .ellipse.top-right {
   top: -40px;
   right: -40px;
 }
 
 /* Gambar kendaraan */
-.img-motor,
-.img-mobil {
+.img-motor,.img-mobil {
   position: absolute;
   object-fit: cover;
   /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); */
 }
-
 .img-motor {
   top: 25px;
   right: 230px;
@@ -125,7 +114,6 @@
   width: 220px;
   height: auto;
 }
-
 .img-mobil {
   bottom: 80px;
   right: 50px;
@@ -141,7 +129,6 @@
   /* ruang atas dan bawah */
   position: relative;
 }
-
 .about-container {
   display: flex;
   justify-content: space-between;
@@ -153,7 +140,6 @@
   padding-bottom: 0;
   /* hapus padding/margin bottom di container */
 }
-
 .about-image-wrapper {
   position: absolute;
   bottom: 0;
@@ -163,13 +149,11 @@
   height: auto;
   z-index: 2;
 }
-
 .about-circle {
   width: 100%;
   height: auto;
   display: block;
 }
-
 .about-photo {
   position: absolute;
   bottom: 0;
@@ -178,7 +162,6 @@
   height: auto;
   border-radius: 8px;
 }
-
 .about-text {
   text-align: left;
   /* teks rata kiri */
@@ -189,8 +172,6 @@
   /* dan juga jarak bawah */
   margin-left: 410px;
 }
-
-
 .about-text p {
   color: #777777;
   font-family: 'Poppins';
@@ -198,14 +179,12 @@
   line-height: 1.6;
 }
 
-
 /* ===== Section “Kenali Sumber Jejak Karbonmu” ===== */
 .sources {
   position: relative;
   background: #fff;
   padding: 80px 7vw 100px;
 }
-
 .sources-title {
   text-align: center;
   font-size: 2rem;
@@ -213,7 +192,6 @@
   margin-bottom: 40px;
   color: #222;
 }
-
 .sources-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -221,7 +199,6 @@
   max-width: 1200px;
   margin: 0 auto;
 }
-
 .source-card {
   position: relative;
   background: #FFFFFF;
@@ -231,7 +208,6 @@
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
   overflow: visible;
 }
-
 .source-icon {
   width: 64px;
   height: 64px;
@@ -239,14 +215,12 @@
   background-size: cover;
   border-radius: 50%;
 }
-
 .source-card h3 {
   font-size: 1.1rem;
   margin-bottom: 12px;
   font-weight: 600;
   color: #333;
 }
-
 .source-card p {
   font-size: 0.9rem;
   line-height: 1.4;
@@ -291,46 +265,16 @@
   pointer-events: none;
   z-index: 2;
 }
-
-html,
-body {
+html,body {
   overflow-x: hidden;
 }
 
-
-
-/* Responsive */
-@media (max-width: 1024px) {
-  .hero-text h1 {
-    font-size: 2.5rem;
-  }
-
-  .ellipse {
-    width: 300px;
-    height: 300px;
-  }
-
-  .img-motor,
-  .img-mobil {
-    width: 180px;
-    height: 180px;
-  }
-
-  .about-image-wrapper {
-    width: 250px;
-  }
-
-  .about-text {
-    margin-left: 270px;
-  }
-}
-
+/* Infografik Section */
 .infografik {
   background-color: #FFFDE7;
   padding: 80px 7vw;
   font-family: 'Poppins', sans-serif;
 }
-
 .infografik-container {
   display: flex;
   flex-wrap: wrap;
@@ -338,96 +282,226 @@ body {
   align-items: flex-start;
   justify-content: space-between;
 }
-
 .infografik-left {
   flex: 1;
   min-width: 300px;
 }
-
 .infografik-left h2 {
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 12px;
   color: #1d1d1d;
 }
-
 .infografik-left p {
   color: #666;
   font-size: 1rem;
   margin-bottom: 24px;
 }
-
 .infografik-image-wrapper {
   position: relative;
   max-width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
-
 .infografik-image {
   width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  height: auto;
+  display: block;
 }
-
 .icon1 {
   position: absolute;
-  top: 12px;
-  left: 12px;
+  top: 16px;
+  left: 16px;
   width: 48px;
   height: 48px;
 }
-
 .icon2 {
   position: absolute;
-  bottom: 12px;
-  right: 12px;
+  bottom: 16px;
+  right: 16px;
   width: 48px;
   height: 48px;
 }
-
 .infografik-right {
   flex: 1;
   min-width: 300px;
 }
-
 .infografik-right h3 {
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 16px;
   color: #1a1a1a;
 }
-
 .infografik-steps {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-
 .infografik-steps li {
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  margin-bottom: 20px;
 }
-
 .infografik-steps li img {
   width: 44px;
   height: 44px;
   flex-shrink: 0;
 }
-
 .infografik-steps li strong {
   font-size: 1rem;
   font-weight: 600;
   color: #333;
 }
-
 .infografik-steps li p {
   font-size: 0.9rem;
   color: #555;
   margin-top: 4px;
 }
 
+/* Kegiatan Karbon Offset Section */
+.offset-section {
+  padding: 60px 7vw;
+  background: #fff;
+  font-family: 'Poppins', sans-serif;
+}
 
+.offset-section-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #222;
+}
+
+.offset-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.offset-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eaeaea;
+}
+
+.offset-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+.offset-card-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 66.66%; /* 3:2 aspect ratio */
+  overflow: hidden;
+}
+
+.offset-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.offset-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  color: white;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0));
+}
+
+.offset-card-title {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.offset-card-location {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.offset-card-button-wrapper {
+  padding: 16px;
+  text-align: center;
+  margin-top: auto;
+}
+
+.offset-card-button {
+  width: 100%;
+  background: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #222;
+  border: 2px solid #FFE066;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.offset-card-button:hover {
+  background: #FFE066;
+  color: #222;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 224, 102, 0.3);
+}
+
+.offset-card-detail {
+  padding: 16px;
+  background: #f9f9f9;
+  font-size: 0.95rem;
+  color: #333;
+  border-top: 1px solid #eee;
+}
+
+.offset-card-detail p {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.offset-card-detail p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero-text h1 {
+    font-size: 2.5rem;
+  }
+  .ellipse {
+    width: 300px;
+    height: 300px;
+  }
+  .img-motor,
+  .img-mobil {
+    width: 180px;
+    height: 180px;
+  }
+  .about-image-wrapper {
+    width: 250px;
+  }
+  .about-text {
+    margin-left: 270px;
+  }
+}
 
 @media (max-width: 768px) {
   .hero {
@@ -435,71 +509,69 @@ body {
     justify-content: center;
     text-align: center;
   }
-
   .hero-text {
     max-width: 100%;
   }
-
   .img-motor,
   .img-mobil,
   .ellipse {
     display: none;
   }
-
   .about-container {
     flex-direction: column;
     text-align: center;
   }
-
   .about-image-wrapper {
     position: static;
     width: 100%;
     margin-bottom: 20px;
   }
-
   .about-photo {
     position: static;
     width: 80%;
     margin: 0 auto;
   }
-
   .about-text {
     margin-left: 0;
     margin-bottom: 40px;
   }
-
   .sources {
     padding: 60px 5vw 80px;
   }
-
   .sources-title {
     font-size: 1.75rem;
     margin-bottom: 24px;
   }
-
   .source-card {
     padding: 20px 12px;
-}
-
-  @media (max-width: 768px) {
-    .infografik-container {
-      flex-direction: column;
-    }
-
-    .infografik-left,
-    .infografik-right {
-      width: 100%;
-    }
   }
+  .infografik-container {
+    flex-direction: column;
+  }
+  .infografik-left,
+  .infografik-right {
+    width: 100%;
+  }
+  .offset-section {
+    padding: 40px 5vw;
+  }
+  .offset-section-title {
+    font-size: 1.75rem;
+    margin-bottom: 30px;
+  }
+  .offset-cards-grid {
+    grid-template-columns: 1fr; /* Single column on small screens */
+  }
+  .offset-card-image-wrapper {
+    padding-top: 75%; /* Adjust aspect ratio for mobile if needed, or keep 3:2 */
+  }
+}
 </style>
 @endpush
-
-
 
 @section('content')
 <div class="ellipse top-right"></div>
 <section class="hero">
-
   <div class="hero-text">
     <div class="subtitle">Calculator Karbon</div>
     <h1>Hitung Jejak Karbon<br>Kendaraanmu Sekarang</h1>
@@ -548,7 +620,6 @@ body {
     </div>
     <div class="source-card">
       <div class="decoration_2 "></div>
-
       <div class="source-icon" style="background-image:url('{{ asset('assets/images/page1_3/asset1_3.2.png') }}')">
       </div>
       <h3>Transportasi Udara</h3>
@@ -570,30 +641,29 @@ body {
     </div>
   </div>
 </section>
-<section style="background-color: #fefee6; padding: 60px 7vw; font-family: 'Poppins', sans-serif;">
-  <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center;">
-    
+
+<section class="infografik">
+  <div class="infografik-container">
     <!-- KIRI -->
-    <div style="flex: 1 1 400px; max-width: 500px;">
-      <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; color: #1a1a1a;">
+    <div class="infografik-left">
+      <h2>
         5 Langkah Infografik Kalkulator Karbon
       </h2>
-      <p style="font-size: 1rem; color: #555; margin-bottom: 24px;">
+      <p>
         Yuk mulai sekarang! Setiap langkah kecilmu berarti untuk masa depan bumi.
       </p>
-      <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 16px rgba(0,0,0,0.1);">
-        <img src="{{ asset('assets/images/infografik/windfarm.png') }}" alt="Infografik" style="width: 100%; height: auto; display: block;">
+      <div class="infografik-image-wrapper">
+        <img src="{{ asset('assets/images/infografik/windfarm.png') }}" alt="Infografik" class="infografik-image">
         <!-- Ikon overlay kiri atas -->
-        <img src="{{ asset('assets/images/infografik/ikon1.png') }}" alt="icon1" style="position: absolute; top: 16px; left: 16px; width: 48px;">
+        <img src="{{ asset('assets/images/infografik/ikon1.png') }}" alt="icon1" class="icon1">
         <!-- Ikon overlay kanan bawah -->
-        <img src="{{ asset('assets/images/infografik/ikon2.png') }}" alt="icon2" style="position: absolute; bottom: 16px; right: 16px; width: 48px;">
+        <img src="{{ asset('assets/images/infografik/ikon2.png') }}" alt="icon2" class="icon2">
       </div>
     </div>
-
     <!-- KANAN -->
-    <div style="flex: 1 1 400px; max-width: 500px;">
-      <h3 style="font-weight: 600; font-size: 1.2rem; margin-bottom: 20px;">Langkah-langkah :</h3>
-      <ul style="display: flex; flex-direction: column; gap: 20px; padding: 0; margin: 0;">
+    <div class="infografik-right">
+      <h3>Langkah-langkah :</h3>
+      <ul class="infografik-steps">
         @php
           $steps = [
             ['ikon' => 'step1.png', 'judul' => 'Pilih Kendaraan & Hitung Emisi', 'desc' => 'Tentukan jenis kendaraan, bahan bakar, dan frekuensi penggunaan.'],
@@ -603,13 +673,12 @@ body {
             ['ikon' => 'step5.png', 'judul' => 'Terima kasih Sudah Berkontribusi!', 'desc' => 'Akses kalkulator untuk menghitung emisi karbon harian Anda.'],
           ];
         @endphp
-
         @foreach($steps as $step)
-        <li style="display: flex; align-items: flex-start; gap: 16px;">
-          <img src="{{ asset('assets/images/infografik/' . $step['ikon']) }}" alt="ikon" style="width: 42px; height: 42px;">
+        <li>
+          <img src="{{ asset('assets/images/infografik/' . $step['ikon']) }}" alt="ikon">
           <div>
-            <p style="margin: 0; font-weight: 600;">{{ $step['judul'] }}</p>
-            <p style="margin: 4px 0 0; font-size: 0.95rem; color: #555;">{{ $step['desc'] }}</p>
+            <strong>{{ $step['judul'] }}</strong>
+            <p>{{ $step['desc'] }}</p>
           </div>
         </li>
         @endforeach
@@ -620,11 +689,10 @@ body {
 
 <script src="//unpkg.com/alpinejs" defer></script>
 
-<section class="offset-section" style="padding: 60px 7vw; background: #fff;">
-  <h2 style="text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 40px; font-family: 'Poppins', sans-serif;">
+<section class="offset-section">
+  <h2 class="offset-section-title">
     Kegiatan Karbon Offset
   </h2>
-
   @php
     $cards = [
       [
@@ -647,50 +715,44 @@ body {
       ],
     ];
   @endphp
-
-  <div 
-    class="offset-cards" 
+  <div
+    class="offset-cards-grid"
     x-data="{ openCard: null }"
-    style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center;"
   >
     @foreach ($cards as $index => $card)
-    <div 
-      style="width: 300px; font-family: 'Poppins', sans-serif; background: #fff; border-radius: 16px; box-shadow: 0 6px 12px rgba(0,0,0,0.1); overflow: hidden; transition: all 0.3s;"
-    >
+    <div class="offset-card">
       <!-- Gambar dan Judul -->
-      <div style="position: relative;">
-        <img 
-          src="{{ asset('assets/images/infografik/' . $card['gambar']) }}" 
-          alt="{{ $card['judul'] }}" 
-          style="width: 100%; height: 250px; object-fit: cover;"
+      <div class="offset-card-image-wrapper">
+        <img
+          src="{{ asset('assets/images/infografik/' . $card['gambar']) }}"
+          alt="{{ $card['judul'] }}"
+          class="offset-card-image"
         >
-        <div style="position: absolute; top: 0; left: 0; padding: 16px; color: white; background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0)); width: 100%;">
-          <p style="font-weight: 700; font-size: 1rem; margin-bottom: 4px;">{{ $card['judul'] }}</p>
-          <p style="font-size: 0.85rem;">Lokasi: {{ $card['lokasi'] }}</p>
+        <div class="offset-card-overlay">
+          <p class="offset-card-title">{{ $card['judul'] }}</p>
+          <p class="offset-card-location">Lokasi: {{ $card['lokasi'] }}</p>
         </div>
       </div>
-
       <!-- Tombol Lihat/Tutup -->
-      <div style="padding: 16px; text-align: center;">
-        <button 
+      <div class="offset-card-button-wrapper">
+        <button
           @click="openCard === {{ $index }} ? openCard = null : openCard = {{ $index }}"
-          style="width: 100%; background: #f4f4f4; padding: 12px; border-radius: 24px; font-weight: 600; color: #000; border: 2px solid #000;">
+          class="offset-card-button"
+        >
           <span x-text="openCard === {{ $index }} ? 'Tutup Detail' : 'Lihat Detail'"></span>
         </button>
       </div>
-
       <!-- Detail Konten Expand -->
-      <div 
-        x-show="openCard === {{ $index }}" 
-        x-transition 
-        style="padding: 16px; background: #f9f9f9; font-size: 0.95rem; color: #333;"
+      <div
+        x-show="openCard === {{ $index }}"
+        x-transition
+        class="offset-card-detail"
       >
-        <p style="margin-bottom: 8px;">{{ $card['deskripsi'] }}</p>
+        <p>{{ $card['deskripsi'] }}</p>
         <p><strong>Lokasi:</strong> {{ $card['lokasi'] }}</p>
       </div>
     </div>
     @endforeach
   </div>
 </section>
-
 @endsection
