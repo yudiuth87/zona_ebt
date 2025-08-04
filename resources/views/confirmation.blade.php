@@ -36,38 +36,80 @@
 .payment-header h2 {
   font-size: 22px;
   font-weight: 700;
+  text-align: center;
+  margin-bottom: 8px;
 }
 
 .payment-header .invoice {
   color: #555;
   margin-top: 4px;
+  text-align: center;
+  margin-bottom: 24px;
 }
 
-.payment-body {
+/* New section for vehicle list */
+.vehicle-summary-list {
+  background: #f8f8f8;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #e0e0e0;
+}
+
+.vehicle-summary-list h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #222;
+  text-align: center;
+}
+
+.vehicle-summary-item {
   display: flex;
-  gap: 16px;
-  margin: 24px 0;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.payment-body img {
-  width: 80px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 8px;
+.vehicle-summary-item:last-child {
+  border-bottom: none;
 }
 
-.payment-desc .title {
+.vehicle-item-icon {
+  width: 40px;
+  height: 40px;
+  background: #e8f5e8; /* Light green background */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.vehicle-item-details {
+  flex: 1;
+}
+
+.vehicle-item-name {
   font-size: 14px;
   font-weight: 600;
+  color: #222;
+  margin-bottom: 2px;
 }
 
-.payment-desc p {
-  margin: 4px 0;
+.vehicle-item-location {
+  font-size: 13px;
+  color: #666;
 }
 
-.payment-desc .co2 {
-  color: #7AC142;
+.vehicle-item-emission {
+  text-align: right;
+  font-size: 14px;
   font-weight: 600;
+  color: #4CAF50;
+  flex-shrink: 0;
 }
 
 .payment-footer {
@@ -104,6 +146,22 @@
 .pay-btn:hover {
   background: #6bb13b;
 }
+
+@media (max-width: 768px) {
+  .payment-container {
+    margin: 20px;
+    padding: 24px 16px;
+  }
+  .vehicle-summary-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .vehicle-item-emission {
+    width: 100%;
+    text-align: left;
+  }
+}
 </style>
 @endpush
 
@@ -121,24 +179,48 @@
     <h2>Ringkasan Pesan</h2>
     <div class="invoice">Invoice #: {{ $invoice_number }}</div>
   </div>
-  <div class="payment-body">
-    <img src="{{ $project_image }}" alt="{{ $project_name }}">
-    <div class="payment-desc">
-      <div class="title">{{ $project_name }}</div>
-      <p>{{ $description }}</p>
-      <p class="co2">{{ $co2 }}</p>
-      <p><i class="bx bx-gas-pump"></i> {{ $fuel }}</p>
-      <p><i class="bx bx-calendar"></i> Pay before: {{ $due_date }}</p>
-    </div>
+
+  <!-- Vehicle Summary List -->
+  <div class="vehicle-summary-list">
+    <h3>Detail Emisi per Kendaraan/Peralatan</h3>
+    @if (!empty($vehicles_details))
+      @foreach ($vehicles_details as $vehicle)
+        <div class="vehicle-summary-item">
+          <div class="vehicle-item-icon">
+            @php
+              $icon = '';
+              $transportType = $vehicle['jenis'] ?? '';
+              $vehicleType = $vehicle['jenis_kendaraan'] ?? '';
+              $transportIcons = [
+                'darat' => ['Mobil' => '🚗', 'Motor' => '🏍️', 'Bus' => '🚌', 'Kereta' => '🚆'],
+                'laut' => ['Kapal Penumpang' => '⛴️', 'Kapal Barang' => '🚢'],
+                'udara' => ['Pesawat Komersil' => '✈️', 'Pesawat Pribadi' => '🛩️'],
+                'rumah' => ['AC' => '❄️', 'Kulkas' => '🧊', 'Lampu' => '💡', 'Mesin Cuci' => '🧺']
+              ];
+              if (isset($transportIcons[$transportType][$vehicleType])) {
+                $icon = $transportIcons[$transportType][$vehicleType];
+              } else {
+                $icon = '❓'; // Default icon if not found
+              }
+            @endphp
+            {{ $icon }}
+          </div>
+          <div class="vehicle-item-details">
+            <div class="vehicle-item-name">{{ $vehicle['jenis_kendaraan'] }} - {{ $vehicle['bahan_bakar'] }}</div>
+            <div class="vehicle-item-location">Lokasi: {{ $vehicle['selected_location']['nama'] ?? 'Belum dipilih' }}</div>
+          </div>
+          <div class="vehicle-item-emission">{{ number_format($vehicle['emisi'] ?? 0, 2, ',', '.') }} kg CO₂</div>
+        </div>
+      @endforeach
+    @else
+      <p style="text-align: center; color: #888;">Tidak ada detail kendaraan yang tersedia.</p>
+    @endif
   </div>
+
   <div class="payment-footer">
     <div class="line-item">
-      <span>1 × Rp {{ number_format($amount,0,',','.') }}</span>
-      <span>Rp {{ number_format($amount,0,',','.') }}</span>
-    </div>
-    <div class="line-item">
-      <span>Subtotal :</span>
-      <span>Rp {{ number_format($amount,0,',','.') }}</span>
+      <span>Total Emisi Keseluruhan:</span>
+      <span>{{ $co2 }}</span>
     </div>
     <div class="line-item total">
       <span>Total yang harus dibayar:</span>

@@ -293,9 +293,9 @@
         <p>Rp {{ number_format($biaya_offset ?? 0, 0, ',', '.') }}</p>
       </div>
     </div>
-    <div class="order-summary-location">
+    <!-- <div class="order-summary-location">
       <strong>Lokasi:</strong> {{ $lokasi_terpilih ?? 'Proyek Mangrove di Teluk Benoa Bali' }}
-    </div>
+    </div> -->
   </div>
 
   <!-- Form Card -->
