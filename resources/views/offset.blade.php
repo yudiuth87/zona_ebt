@@ -4,7 +4,7 @@
 @push('styles')
 <style>
 .offset-container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 32px auto;
   background: #fff;
   border-radius: 18px;
@@ -26,10 +26,173 @@
   margin-bottom: 24px;
 }
 
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 24px;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+
+.back-btn:hover {
+  color: #333;
+}
+
+.back-btn svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+/* Progress Indicator */
+.progress-container {
+  margin-bottom: 32px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.progress-title-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+}
+
+.progress-nav-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #e0e0e0;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 16px;
+  color: #666;
+  font-weight: bold;
+}
+
+.progress-nav-btn:hover:not(:disabled) {
+  border-color: #FFE066;
+  background: #FFFBE6;
+  color: #222;
+}
+
+.progress-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.progress-counter {
+  background: #FFE066;
+  color: #222;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.progress-bar {
+  background: #f0f0f0;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #7AC142, #4CAF50);
+  height: 100%;
+  transition: width 0.3s ease;
+  border-radius: 4px;
+}
+
+/* Current Vehicle Card */
+.current-vehicle-card {
+  background: linear-gradient(135deg, #E8F5E8, #F0F8F0);
+  border: 2px solid #4CAF50;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.vehicle-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.vehicle-icon {
+  width: 48px;
+  height: 48px;
+  background: #4CAF50;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.vehicle-details h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 4px 0;
+}
+
+.vehicle-details p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.vehicle-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #222;
+}
+
 /* Lokasi Cards */
 #lokasiCards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
   margin-bottom: 32px;
 }
@@ -41,12 +204,19 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
 }
 
 .lokasi-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.lokasi-card.selected {
+  border-color: #FFE066;
+  background: #FFFBE6;
+  transform: translateY(-4px);
 }
 
 .lokasi-card img {
@@ -87,225 +257,623 @@
   font-weight: 600;
   cursor: pointer;
   text-align: center;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
 
 .lokasi-card-btn:hover {
   background: #6bb13b;
 }
 
-/* Summary & Detail unchanged */
-.offset-summary,
-.offset-detail {
-  background: #fff;
-  border: 1.5px solid #EAEAEA;
-  border-radius: 12px;
-  padding: 18px 20px 10px;
-  margin-bottom: 18px;
-}
-
-.offset-summary-title,
-.offset-detail-title {
-  font-weight: 700;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.offset-table {
-  width: 100%;
-  font-size: 15px;
-  margin-bottom: 0;
-}
-
-.offset-table td {
-  padding: 4px 0;
+.lokasi-card.selected .lokasi-card-btn {
+  background: #FFE066;
   color: #222;
 }
 
-.offset-table td:first-child {
-  color: #888;
-  width: 48%;
-}
-
-.offset-total {
-  text-align: center;
-  font-size: 18px;
-  font-weight: 700;
-  margin: 24px 0 18px;
-}
-
-.offset-btn {
-  display: block;
+/* Main Action Button */
+.main-action-btn {
   width: 100%;
-  background: #7AC142;
-  color: #fff;
+  padding: 16px 0;
+  border-radius: 10px;
   border: none;
-  border-radius: 8px;
-  padding: 14px 0;
   font-size: 16px;
   font-weight: 700;
-  margin-top: 10px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
+  margin-top: 24px;
 }
 
-.offset-btn:hover {
+.main-action-btn.disabled {
+  background: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.main-action-btn.enabled {
+  background: #7AC142;
+  color: white;
+}
+
+.main-action-btn.enabled:hover {
   background: #6bb13b;
+  transform: translateY(-2px);
+}
+
+/* Final Summary Section */
+.final-summary {
+  background: linear-gradient(135deg, #FFFBE6, #FFF8D6);
+  border: 2px solid #FFE066;
+  border-radius: 15px;
+  padding: 24px;
+  margin-top: 32px;
+}
+
+.final-summary-title {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 24px;
+  color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.summary-item {
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+}
+
+.summary-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.summary-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+}
+
+/* Vehicle Locations List */
+.vehicle-locations {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #e0e0e0;
+}
+
+.vehicle-locations h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #222;
+}
+
+.location-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.location-item:last-child {
+  border-bottom: none;
+}
+
+.location-icon {
+  width: 40px;
+  height: 40px;
+  background: #f8f8f8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.location-details {
+  flex: 1;
+}
+
+.location-vehicle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 2px;
+}
+
+.location-name {
+  font-size: 13px;
+  color: #666;
+}
+
+.location-emission {
+  text-align: right;
+  font-size: 14px;
+  font-weight: 600;
+  color: #4CAF50;
+}
+
+@media (max-width: 768px) {
+  .offset-container {
+    margin: 16px;
+    padding: 24px 16px;
+  }
+  
+  .progress-title-section {
+    gap: 8px;
+  }
+  
+  .progress-nav-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+  
+  .vehicle-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .location-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
 }
 </style>
 @endpush
 
 @section('content')
 <div class="offset-container">
-  <div class="offset-title">Cari Lokasi Carbon Offsetmu</div>
-  <div class="offset-subtitle">Pilih lokasi terbaik untuk melakukan aksi penanaman pohon sebagai upaya mengimbangi jejak
-    karbon Anda. Setiap lokasi membawa dampak nyata bagi lingkungan.</div>
+  <!-- Back Button -->
+  <a href="/kalkulator" class="back-btn">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+    Kembali ke Kalkulator
+  </a>
+
+  <div class="offset-title">Pilih Lokasi Carbon Offset</div>
+  <div class="offset-subtitle">Pilih lokasi terbaik untuk setiap kendaraan/peralatan Anda. Setiap lokasi membawa dampak nyata bagi lingkungan.</div>
+  
+  <!-- Progress Indicator -->
+  <div class="progress-container" id="progressContainer">
+    <div class="progress-header">
+      <div class="progress-title-section">
+        <button class="progress-nav-btn" id="prevVehicleBtn" onclick="navigateVehicle(-1)">‹</button>
+        <div class="progress-title" id="progressTitle">Kendaraan 1 dari 1</div>
+        <button class="progress-nav-btn" id="nextVehicleBtn" onclick="navigateVehicle(1)">›</button>
+      </div>
+      <div class="progress-counter" id="progressCounter">1/1</div>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width: 100%"></div>
+    </div>
+  </div>
+
+  <!-- Current Vehicle Card -->
+  <div class="current-vehicle-card" id="currentVehicleCard">
+    <div class="vehicle-info">
+      <div class="vehicle-icon" id="vehicleIcon">🚗</div>
+      <div class="vehicle-details">
+        <h3 id="vehicleName">Mobil - Pertalite</h3>
+        <p id="vehicleTransport">Transportasi Darat</p>
+      </div>
+    </div>
+    <div class="vehicle-stats" id="vehicleStats">
+      <!-- Stats will be populated by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Search -->
   <div style="margin-bottom:24px;">
     <input type="text" id="searchLokasi" placeholder="Cari Lokasi Penanaman"
-      style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid #ddd;font-size:15px;">
+      style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid #ddd;font-size:15px;">
   </div>
+
+  <!-- Location Cards -->
   <div id="lokasiCards"></div>
 
-  <div class="offset-title" style="margin-top:32px;">Lokasi Offset</div>
-  <div class="offset-total">Total Emisi : {{ number_format($total_emisi ?? 0, 2, ',', '.') }} Kg CO2</div>
+  <!-- Main Action Button -->
+  <button class="main-action-btn disabled" id="mainActionBtn" disabled>
+    Pilih lokasi untuk semua kendaraan terlebih dahulu
+  </button>
 
-  <div class="offset-summary">
-    <div class="offset-summary-title">Ringkasan Emisi Anda</div>
-    <table class="offset-table">
-      <tr>
-        <td>Jenis Kendaraan</td>
-        <td>{{ $jenis_kendaraan ?? '-' }}</td>
-      </tr>
-      <tr>
-        <td>Jarak Tempuh</td>
-        <td>{{ isset($jarak) ? $jarak . ' KM' : '-' }}</td>
-      </tr>
-      <tr>
-        <td>Jumlah Orang</td>
-        <td>{{ $penumpang ?? '-' }}</td>
-      </tr>
-      <tr>
-        <td>Frekuensi</td>
-        <td>{{ $frekuensi ?? '-' }}</td>
-      </tr>
-      <tr>
-        <td>Bahan Bakar</td>
-        <td>{{ $bahan_bakar ?? '-' }}</td>
-      </tr>
-    </table>
+  <!-- Final Summary Section (Hidden initially) -->
+  <div class="final-summary" id="finalSummary" style="display: none;">
+    <div class="final-summary-title">
+      <span>📊</span> Detail Offset Emisi Anda
+    </div>
+    
+    <div class="summary-grid">
+      <div class="summary-item">
+        <div class="summary-label">Total Kendaraan</div>
+        <div class="summary-value" id="totalVehiclesCount">0</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">Total Emisi Keseluruhan</div>
+        <div class="summary-value" id="totalEmissionValue">0 kg CO₂</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-label">Estimasi Biaya Keseluruhan</div>
+        <div class="summary-value" id="totalCostValue">Rp 0</div>
+      </div>
+    </div>
+
+    <div class="vehicle-locations" id="vehicleLocationsList">
+      <h4>Lokasi Offset Emisi:</h4>
+      <!-- Vehicle locations will be populated here -->
+    </div>
+
+    <button class="main-action-btn enabled" onclick="proceedToCheckout()">
+      Tebus Sekarang 🚀
+    </button>
   </div>
-
-  <div class="offset-detail">
-    <div class="offset-detail-title">Detail Offset Emisi Anda</div>
-    <table class="offset-table">
-      <tr>
-        <td>Lokasi Penanaman</td>
-        <td id="lokasiTerpilih">Proyek Mangrove di Teluk Benoa Bali</td>
-      </tr>
-      <tr>
-        <td>Jenis Kegiatan Offset</td>
-        <td>Menanam Pohon</td>
-      </tr>
-      <tr>
-        <td>Jenis Pohon</td>
-        <td>Mangrove</td>
-      </tr>
-      <tr>
-        <td>Total Emisi</td>
-        <td>{{ number_format($total_emisi ?? 0, 2, ',', '.') }} Kg CO2</td>
-      </tr>
-      <tr>
-        <td>Estimasi Biaya</td>
-        <td>Rp. {{ number_format($biaya_offset ?? 0, 0, ',', '.') }}</td>
-      </tr>
-    </table>
-  </div>
-
-  <button class="offset-btn">Tebus Sekarang</button>
 </div>
 @endsection
 
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const lokasiList = [{
+  // Get vehicles data from session
+  const offsetData = @json(session('offset_data', null));
+
+  console.log('=== DEBUG SESSION DATA ===');
+  console.log('Offset Data:', offsetData);
+  console.log('All Session Keys:', @json(array_keys(session()->all())));
+  console.log('Session All:', @json(session()->all()));
+  console.log('==========================');
+
+  let vehiclesData = [];
+  let totalEmission = 0;
+  let totalCost = 0;
+
+  if (offsetData && offsetData.vehicles) {
+    vehiclesData = offsetData.vehicles;
+    totalEmission = offsetData.total_emission || 0;
+    totalCost = offsetData.total_cost || 0;
+    
+    console.log('Using offset_data from session');
+    console.log('Vehicles found:', vehiclesData.length);
+  } else {
+    console.error('No offset_data found in session!');
+    console.log('Available session keys:', @json(array_keys(session()->all())));
+  }
+  
+  // Data sudah dalam format yang benar, tidak perlu normalize
+  console.log('Final Data:');
+  console.log('- Vehicles:', vehiclesData);
+  console.log('- Count:', vehiclesData.length);
+  console.log('- Total Emission:', totalEmission);
+  console.log('- Total Cost:', totalCost);
+  
+  let currentVehicleIndex = 0;
+  let selectedLocations = {};
+  
+  const lokasiList = [
+    {
       nama: 'Sertifikat PLTM Gunung Wugul',
       gambar: '/assets/images/lokasiCarbon/gambar-1.jpg',
-      deskripsi: 'PLTM Gunung Wugul adalah pembangkit listrik tenaga mini-hidro dengan kapasitas total 3 MW'
+      deskripsi: 'PLTM Gunung Wugul adalah pembangkit listrik tenaga mini-hidro dengan kapasitas total 3 MW',
+      jenis: 'Energi Terbarukan'
     },
     {
       nama: 'Proyek Mangrove di Teluk Benoa Bali',
       gambar: '/assets/images/lokasiCarbon/gambar-2.webp',
-      deskripsi: 'Teluk Benoa, Bali adalah kawasan kaya biodiversitas dengan hutan bakau'
+      deskripsi: 'Teluk Benoa, Bali adalah kawasan kaya biodiversitas dengan hutan bakau',
+      jenis: 'Penanaman Pohon'
     },
     {
       nama: 'REC Zonaebt',
       gambar: '/assets/images/lokasiCarbon/gambar-3.webp',
-      deskripsi: 'Sertifikat digital pembuktian kepemilikan energi terbarukan'
+      deskripsi: 'Sertifikat digital pembuktian kepemilikan energi terbarukan',
+      jenis: 'Sertifikat Digital'
     },
     {
       nama: 'REC Geothermal',
       gambar: '/assets/images/lokasiCarbon/gambar-4.webp',
-      deskripsi: 'Sertifikat energi ramah lingkungan seperti surya, angin, hidro'
+      deskripsi: 'Sertifikat energi ramah lingkungan seperti surya, angin, hidro',
+      jenis: 'Energi Geothermal'
     }
   ];
 
-  function renderLokasiCards(list) {
-    const container = document.getElementById('lokasiCards');
-    container.innerHTML = '';
-    if (!list.length) {
-      container.innerHTML = '<p style="text-align:center;color:#999;">Tidak ada lokasi ditemukan</p>';
+  // Transport icons mapping
+  const transportIcons = {
+    'darat': {
+      'Mobil': '🚗',
+      'Motor': '🏍️', 
+      'Bus': '🚌',
+      'Kereta': '🚆'
+    },
+    'laut': {
+      'Kapal Penumpang': '⛴️',
+      'Kapal Barang': '🚢'
+    },
+    'udara': {
+      'Pesawat Komersil': '✈️',
+      'Pesawat Pribadi': '🛩️'
+    },
+    'rumah': {
+      'AC': '❄️',
+      'Kulkas': '🧊',
+      'Lampu': '💡',
+      'Mesin Cuci': '🧺'
+    }
+  };
+
+  const transportNames = {
+    'darat': 'Transportasi Darat',
+    'laut': 'Transportasi Laut',
+    'udara': 'Transportasi Udara', 
+    'rumah': 'Peralatan Rumah Tangga'
+  };
+
+  function updateProgress() {
+    const totalVehicles = vehiclesData.length;
+    const progressPercentage = ((currentVehicleIndex + 1) / totalVehicles) * 100;
+    
+    document.getElementById('progressFill').style.width = progressPercentage + '%';
+    document.getElementById('progressTitle').textContent = `Kendaraan ${currentVehicleIndex + 1} dari ${totalVehicles}`;
+    document.getElementById('progressCounter').textContent = `${currentVehicleIndex + 1}/${totalVehicles}`;
+    
+    // Update navigation buttons
+    document.getElementById('prevVehicleBtn').disabled = currentVehicleIndex === 0;
+    document.getElementById('nextVehicleBtn').disabled = currentVehicleIndex === totalVehicles - 1;
+  }
+
+  function updateCurrentVehicleCard() {
+    const vehicle = vehiclesData[currentVehicleIndex];
+    if (!vehicle) {
+      console.error('No vehicle data at index:', currentVehicleIndex);
       return;
     }
+
+    console.log('Updating card for vehicle:', vehicle);
+
+    // Get appropriate icon dengan fallback yang lebih baik
+    let vehicleIcon = '🚗'; // default
+    if (transportIcons[vehicle.jenis] && transportIcons[vehicle.jenis][vehicle.jenis_kendaraan]) {
+      vehicleIcon = transportIcons[vehicle.jenis][vehicle.jenis_kendaraan];
+    }
+    
+    document.getElementById('vehicleIcon').textContent = vehicleIcon;
+    document.getElementById('vehicleName').textContent = `${vehicle.jenis_kendaraan} - ${vehicle.bahan_bakar}`;
+    document.getElementById('vehicleTransport').textContent = transportNames[vehicle.jenis] || 'Transportasi';
+
+    // Update stats based on transport type
+    const statsContainer = document.getElementById('vehicleStats');
+    if (vehicle.jenis === 'rumah') {
+      statsContainer.innerHTML = `
+        <div class="stat-item">
+          <div class="stat-label">Daya</div>
+          <div class="stat-value">${vehicle.daya || 0} W</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Jumlah</div>
+          <div class="stat-value">${vehicle.jumlah_alat || 1} unit</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Durasi</div>
+          <div class="stat-value">${vehicle.durasi || 0} jam</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Emisi</div>
+          <div class="stat-value">${parseFloat(vehicle.emisi || 0).toFixed(2)} kg CO₂</div>
+        </div>
+      `;
+    } else {
+      statsContainer.innerHTML = `
+        <div class="stat-item">
+          <div class="stat-label">Jarak</div>
+          <div class="stat-value">${vehicle.jarak || 0} km</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Penumpang</div>
+          <div class="stat-value">${vehicle.penumpang || 1} orang</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Frekuensi</div>
+          <div class="stat-value">${vehicle.frekuensi || 1} hari</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Emisi</div>
+          <div class="stat-value">${parseFloat(vehicle.emisi || 0).toFixed(2)} kg CO₂</div>
+        </div>
+      `;
+    }
+  }
+
+  function renderLokasiCards(list = lokasiList) {
+    const container = document.getElementById('lokasiCards');
+    container.innerHTML = '';
+    
+    if (!list.length) {
+      container.innerHTML = '<p style="text-align:center;color:#999;padding:40px;">Tidak ada lokasi ditemukan</p>';
+      return;
+    }
+
     list.forEach((lokasi, idx) => {
+      const isSelected = selectedLocations[currentVehicleIndex] === idx;
       const card = document.createElement('div');
-      card.className = 'lokasi-card';
+      card.className = `lokasi-card ${isSelected ? 'selected' : ''}`;
       card.innerHTML = `
-        <img src="${lokasi.gambar}" alt="${lokasi.nama}">
+        <img src="${lokasi.gambar}" alt="${lokasi.nama}" onerror="this.src='/placeholder.svg?height=140&width=280&text=${encodeURIComponent(lokasi.nama)}'">
         <div class="lokasi-card-body">
           <div class="lokasi-card-title">${lokasi.nama}</div>
           <div class="lokasi-card-desc">${lokasi.deskripsi}</div>
-          <button class="lokasi-card-btn" data-idx="${idx}">Pilih Lokasi</button>
+          <button class="lokasi-card-btn" data-idx="${idx}">
+            ${isSelected ? '✓ Terpilih' : 'Pilih Lokasi'}
+          </button>
         </div>
       `;
       container.appendChild(card);
     });
+
+    // Add click handlers
     document.querySelectorAll('.lokasi-card-btn').forEach(btn => {
       btn.addEventListener('click', function() {
-        document.getElementById('lokasiTerpilih').innerText = lokasiList[this.dataset.idx].nama;
+        const idx = parseInt(this.dataset.idx);
+        selectedLocations[currentVehicleIndex] = idx;
+        
+        // Update UI
+        document.querySelectorAll('.lokasi-card').forEach(card => card.classList.remove('selected'));
+        this.closest('.lokasi-card').classList.add('selected');
+        
+        // Update button text
+        document.querySelectorAll('.lokasi-card-btn').forEach(b => b.textContent = 'Pilih Lokasi');
+        this.textContent = '✓ Terpilih';
+        
+        // Check if all vehicles have locations selected
+        updateMainActionButton();
       });
     });
   }
 
+  function updateMainActionButton() {
+    const allSelected = vehiclesData.every((_, index) => selectedLocations[index] !== undefined);
+    const mainBtn = document.getElementById('mainActionBtn');
+    
+    if (allSelected) {
+      mainBtn.className = 'main-action-btn enabled';
+      mainBtn.disabled = false;
+      mainBtn.textContent = 'Lihat Detail Offset Emisi';
+      mainBtn.onclick = showFinalSummary;
+    } else {
+      const selectedCount = Object.keys(selectedLocations).length;
+      mainBtn.className = 'main-action-btn disabled';
+      mainBtn.disabled = true;
+      mainBtn.textContent = `Pilih lokasi untuk ${vehiclesData.length - selectedCount} kendaraan lagi`;
+    }
+  }
+
+  function showFinalSummary() {
+    // Hide main selection interface
+    document.getElementById('progressContainer').style.display = 'none';
+    document.getElementById('currentVehicleCard').style.display = 'none';
+    document.querySelector('#searchLokasi').parentElement.style.display = 'none';
+    document.getElementById('lokasiCards').style.display = 'none';
+    document.getElementById('mainActionBtn').style.display = 'none';
+    
+    // Show final summary
+    document.getElementById('finalSummary').style.display = 'block';
+
+    // Update summary data
+    document.getElementById('totalVehiclesCount').textContent = vehiclesData.length;
+    document.getElementById('totalEmissionValue').textContent = parseFloat(totalEmission).toFixed(2) + ' kg CO₂';
+    document.getElementById('totalCostValue').textContent = 'Rp ' + parseInt(totalCost).toLocaleString('id-ID');
+
+    // Populate vehicle locations list
+    const locationsList = document.getElementById('vehicleLocationsList');
+    const locationsHTML = vehiclesData.map((vehicle, index) => {
+      const locationIdx = selectedLocations[index];
+      const location = lokasiList[locationIdx];
+      const vehicleIcon = transportIcons[vehicle.jenis]?.[vehicle.jenis_kendaraan] || '🚗';
+      
+      return `
+        <div class="location-item">
+          <div class="location-icon">${vehicleIcon}</div>
+          <div class="location-details">
+            <div class="location-vehicle">${vehicle.jenis_kendaraan} - ${vehicle.bahan_bakar}</div>
+            <div class="location-name">Lokasi offset emisi ${index + 1}: ${location ? location.nama : 'Belum dipilih'}</div>
+          </div>
+          <div class="location-emission">${parseFloat(vehicle.emisi || 0).toFixed(2)} kg CO₂</div>
+        </div>
+      `;
+    }).join('');
+    
+    locationsList.innerHTML = `<h4>Lokasi Offset Emisi:</h4>${locationsHTML}`;
+  }
+
+  // Navigation functions
+  window.navigateVehicle = function(direction) {
+    const newIndex = currentVehicleIndex + direction;
+    if (newIndex >= 0 && newIndex < vehiclesData.length) {
+      currentVehicleIndex = newIndex;
+      updateProgress();
+      updateCurrentVehicleCard();
+      renderLokasiCards();
+      updateMainActionButton();
+    }
+  };
+
+  // Search functionality
   document.getElementById('searchLokasi').addEventListener('input', function(e) {
     const keyword = e.target.value.toLowerCase();
-    renderLokasiCards(lokasiList.filter(l => l.nama.toLowerCase().includes(keyword)));
+    const filtered = lokasiList.filter(l => l.nama.toLowerCase().includes(keyword));
+    renderLokasiCards(filtered);
   });
 
-  document.querySelector('.offset-btn').addEventListener('click', function() {
-    const selectedName = document.getElementById('lokasiTerpilih').innerText;
-    const selectedCard = [...document.querySelectorAll('.lokasi-card')].find(c =>
-      c.querySelector('.lokasi-card-title').innerText.trim() === selectedName
-    );
-    const selectedGambar = selectedCard ?
-      selectedCard.querySelector('img').getAttribute('src') :
-      '/assets/images/lokasiCarbon/gambar-2.webp';
+  // Proceed to checkout
+  window.proceedToCheckout = function() {
+    // Prepare data for checkout
+    const checkoutData = {
+      vehicles: vehiclesData.map((vehicle, index) => ({
+        ...vehicle,
+        selected_location: lokasiList[selectedLocations[index]]
+      })),
+      total_emission: totalEmission,
+      total_cost: totalCost,
+      selected_locations: selectedLocations
+    };
+    
+    // Create form and submit
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/form-data-diri';
+    
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'checkout_data';
+    input.value = JSON.stringify(checkoutData);
+    
+    const csrfInput = document.createElement('input');
+    csrfInput.type = 'hidden';
+    csrfInput.name = '_token';
+    csrfInput.value = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    
+    form.appendChild(input);
+    form.appendChild(csrfInput);
+    document.body.appendChild(form);
+    form.submit();
+  };
 
-    const params = new URLSearchParams({
-      total_emisi: @json($total_emisi ?? 0),
-      biaya_offset: @json($biaya_offset ?? 0),
-      jenis_kendaraan: @json($jenis_kendaraan ?? ''),
-      jarak: @json($jarak ?? 0),
-      penumpang: @json($penumpang ?? 1),
-      frekuensi: @json($frekuensi ?? 1),
-      bahan_bakar: @json($bahan_bakar ?? ''),
-      lokasi_terpilih: selectedName,
-      lokasi_gambar: selectedGambar // <<< baru
-    });
-    window.location.href = '/form-data-diri?' + params.toString();
-  });
-
-  renderLokasiCards(lokasiList);
+  // Initialize
+  if (vehiclesData.length > 0) {
+    updateProgress();
+    updateCurrentVehicleCard();
+    renderLokasiCards(); // Langsung tampilkan semua lokasi
+    updateMainActionButton();
+  } else {
+    // Handle case when no vehicles data
+    document.getElementById('progressContainer').innerHTML = `
+      <div style="text-align:center;color:#999;padding:40px;">
+        <h3>Tidak ada data kendaraan</h3>
+        <p>Debug info: Found ${vehiclesData.length} vehicles</p>
+        <p>Session keys: ${Object.keys(@json(session()->all())).join(', ')}</p>
+        <button onclick="window.location.href='/'" style="margin-top:16px;padding:8px 16px;background:#7AC142;color:white;border:none;border-radius:4px;">
+          Kembali ke Kalkulator
+        </button>
+      </div>
+    `;
+  }
 });
 </script>
 @endpush

@@ -12,6 +12,27 @@
   padding: 32px 24px;
 }
 
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 24px;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+
+.back-btn:hover {
+  color: #333;
+}
+
+.back-btn svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
 .payment-header h2 {
   font-size: 22px;
   font-weight: 700;
@@ -88,6 +109,14 @@
 
 @section('content')
 <div class="payment-container">
+  <!-- Back Button -->
+  <a href="/form-data-diri" class="back-btn">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+    Kembali ke Form Data Diri
+  </a>
+
   <div class="payment-header">
     <h2>Ringkasan Pesan</h2>
     <div class="invoice">Invoice #: {{ $invoice_number }}</div>

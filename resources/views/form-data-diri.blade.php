@@ -251,11 +251,11 @@
   .form-container {
     padding: 0 12px;
   }
-
+  
   .form-card {
     padding: 24px 20px;
   }
-
+  
   .order-summary-content {
     flex-direction: column;
     gap: 16px;
@@ -268,7 +268,7 @@
 @section('content')
 <div class="form-container">
   <!-- Back Button -->
-  <a href="{{ route('offset') }}" class="back-btn">
+  <a href="/offset" class="back-btn">
     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
     </svg>
@@ -301,10 +301,8 @@
   <!-- Form Card -->
   <div class="form-card">
     <h2 class="form-card-title">Data Diri</h2>
-
     <form id="formDataDiri" method="POST" action="{{ route('submit-data-diri') }}">
       @csrf
-
       <!-- Hidden fields untuk data emisi -->
       <input type="hidden" name="lokasi_terpilih" value="{{ $lokasi_terpilih }}">
       <input type="hidden" name="lokasi_gambar" value="{{ $lokasi_gambar }}">
@@ -320,10 +318,10 @@
               d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
           </svg>
           Nama Perusahaan/Organisasi
-          <span class="optional">(optional)</span>
+          <span class="required">*</span>
         </label>
         <input type="text" id="nama_perusahaan" name="nama_perusahaan" class="form-input"
-          placeholder="Masukkan nama perusahaan atau organisasi" value="{{ old('nama_perusahaan') }}">
+          placeholder="Masukkan nama perusahaan atau organisasi" required value="{{ old('nama_perusahaan') }}">
         @error('nama_perusahaan')
         <div style="color: #ef4444; font-size: 12px; margin-top: 4px;">{{ $message }}</div>
         @enderror
@@ -413,7 +411,7 @@ document.getElementById('formDataDiri').addEventListener('submit', function(e) {
   const submitBtn = document.getElementById('submitBtn');
   const btnText = document.getElementById('btnText');
   const btnLoading = document.getElementById('btnLoading');
-
+  
   // Show loading state
   submitBtn.disabled = true;
   btnText.style.display = 'none';
