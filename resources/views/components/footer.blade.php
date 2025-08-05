@@ -257,11 +257,12 @@
   <div class="footer-bg"></div>
   <div class="footer-content">
     <div class="footer-section">
-      <div class="branding">
-        <span class="logo-z">Z</span><span class="logo-e">E</span>onaEBT
-      </div>
+      <div class="branding" style="margin-bottom: 15px;">
+    <img src="{{ asset('assets/images/logo.png') }}" alt="ZonaEBT Logo" style="height: 60px; object-fit: contain;">
+</div>
       <p>zonaebt.com merupakan platform informasi dan edukasi energi terbarukan di Indonesia.</p>
     </div>
+
 
     <div class="footer-section">
       <h4>Layanan Kami</h4>
@@ -310,18 +311,28 @@
       </p>
     </div>
 
-    <div class="payment-section">
+      <div class="payment-section">
       <h4>Transaksi aman didukung oleh</h4>
       <div class="payment-logos">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/1200px-Visa_Inc._logo.svg.png" alt="Visa">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/ShopeePay_logo.svg/1200px-ShopeePay_logo.svg.png" alt="ShopeePay">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Logo_dana_blue.svg/1200px-Logo_dana_blue.svg.png" alt="Dana">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee.svg" alt="ShopeePay">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_QRIS.svg" alt=qris>
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Logo_ovo_purple.svg/1200px-Logo_ovo_purple.svg.png" alt="OVO">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mastercard_2019_logo.svg/1200px-Mastercard_2019_logo.svg.png" alt="Mastercard">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Bank_Mandiri_logo_2016.svg/2560px-Bank_Mandiri_logo_2016.svg.png" alt="Mandiri">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/LinkAja.svg/640px-LinkAja.svg.png" alt=linkaja>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Logo_dana_blue.svg/1200px-Logo_dana_blue.svg.png" alt="Dana">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/BRI_2020.svg/640px-BRI_2020.svg.png" alt=bri>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/BNI_2004.svg" alt=bni>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Gopay_logo.svg/640px-Gopay_logo.svg.png" alt=gopay>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Logo_Indomaret.png/640px-Logo_Indomaret.png" alt=indo>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Alfamart_logo.svg" alt=alfa>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/BCA_LOGO.jpg/640px-BCA_LOGO.jpg" alt=bca>
       </div>
     </div>
   </div>
+
+
 
   <div class="footer-bottom">
     <p>© 2025 © zonaebt.com - PT Bala Biotech Indonesia ALL RIGHT RESERVED</p>

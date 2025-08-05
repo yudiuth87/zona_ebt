@@ -219,10 +219,13 @@
   transform: translateY(-4px);
 }
 
-.lokasi-card img {
+.lokasi-image {
   width: 100%;
-  height: 140px;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
+  display: block;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 
 .lokasi-card-body {
@@ -572,25 +575,25 @@ document.addEventListener('DOMContentLoaded', function() {
     {
       nama: 'Sertifikat PLTM Gunung Wugul',
       gambar: '/assets/images/lokasiCarbon/gambar-1.jpg',
-      deskripsi: 'PLTM Gunung Wugul adalah pembangkit listrik tenaga mini-hidro dengan kapasitas total 3 MW',
+      deskripsi: 'PLTM Gunung Wugul adalah pembangkit listrik tenaga mini-hidro dengan kapasitas total 3 MW (2 x 1,5 MW) yang berlokasi di Banjarnegara, Jawa Tengah. Proyek ini merupakan bagian dari upaya pemanfaatan aliran Sungai Urang untuk menghasilkan energi terbarukan yang bersih.',
       jenis: 'Energi Terbarukan'
     },
     {
-      nama: 'Proyek Mangrove di Teluk Benoa Bali',
-      gambar: '/assets/images/lokasiCarbon/gambar-2.webp',
-      deskripsi: 'Teluk Benoa, Bali adalah kawasan kaya biodiversitas dengan hutan bakau',
+      nama: 'Proyek Lahendong Unit 5 & 6',
+      gambar: '/assets/images/lokasiCarbon/gambar-2.png',
+      deskripsi: 'Proyek Lahendong Unit 5 & 6 merupakan inisiatif pengembangan pembangkit listrik tenaga panas bumi oleh PT Pertamina Geothermal Energy Tbk di Sulawesi Utara. Setiap unit memiliki kapasitas sekitar 20 MW untuk mendukung penyediaan energi bersih nasional.',
       jenis: 'Penanaman Pohon'
     },
     {
-      nama: 'REC Zonaebt',
+      nama: 'Sertifikat (REC) Renewable Energy Certificate – ZonaEBT',
       gambar: '/assets/images/lokasiCarbon/gambar-3.webp',
-      deskripsi: 'Sertifikat digital pembuktian kepemilikan energi terbarukan',
+      deskripsi: 'Sertifikat (REC) Renewable Energy Certificate ZonaEBT merupakan bukti digital kepemilikan atas energi terbarukan (renewable energy) yang berasal dari sumber-sumber energi ramah lingkungan, seperti tenaga surya, angin, hidro, biomassa, atau panas bumi (geothermal). Setiap 1 REC mewakili 1 MWh (Megawatt-hour) energi hijau yang masuk ke dalam jaringan listrik.',
       jenis: 'Sertifikat Digital'
     },
     {
-      nama: 'REC Geothermal',
+      nama: 'Sertifikat (REC) Renewable Energy Certificate – Geothermal',
       gambar: '/assets/images/lokasiCarbon/gambar-4.webp',
-      deskripsi: 'Sertifikat energi ramah lingkungan seperti surya, angin, hidro',
+      deskripsi: 'Sertifikat (REC) Renewable Energy Certificate ZonaEBT merupakan sertifikat digital yang menjadi bukti kepemilikan atas energi terbarukan (renewable energy) yang dihasilkan dari sumber daya ramah lingkungan seperti tenaga surya, angin, hidro, biomassa, maupun panas bumi (geothermal). Setiap 1 REC setara dengan 1 MWh (Megawatt-hour) listrik hijau yang disalurkan ke dalam jaringan listrik.',
       jenis: 'Energi Geothermal'
     }
   ];
@@ -609,7 +612,6 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     'udara': {
       'Pesawat Komersil': '✈️',
-      'Pesawat Pribadi': '🛩️'
     },
     'rumah': {
       'AC': '❄️',
@@ -701,51 +703,70 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  function renderLokasiCards(list = lokasiList) {
-    const container = document.getElementById('lokasiCards');
-    container.innerHTML = '';
-    
-    if (!list.length) {
-      container.innerHTML = '<p style="text-align:center;color:#999;padding:40px;">Tidak ada lokasi ditemukan</p>';
-      return;
-    }
+  function renderLokasiCards(originalList = lokasiList) {
+  const container = document.getElementById('lokasiCards');
+  container.innerHTML = '';
 
-    list.forEach((lokasi, idx) => {
-      const isSelected = selectedLocations[currentVehicleIndex] === idx;
-      const card = document.createElement('div');
-      card.className = `lokasi-card ${isSelected ? 'selected' : ''}`;
-      card.innerHTML = `
-        <img src="${lokasi.gambar}" alt="${lokasi.nama}" onerror="this.src='/placeholder.svg?height=140&width=280&text=${encodeURIComponent(lokasi.nama)}'">
-        <div class="lokasi-card-body">
-          <div class="lokasi-card-title">${lokasi.nama}</div>
-          <div class="lokasi-card-desc">${lokasi.deskripsi}</div>
-          <button class="lokasi-card-btn" data-idx="${idx}">
-            ${isSelected ? '✓ Terpilih' : 'Pilih Lokasi'}
-          </button>
-        </div>
-      `;
-      container.appendChild(card);
-    });
-
-    // Add click handlers
-    document.querySelectorAll('.lokasi-card-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const idx = parseInt(this.dataset.idx);
-        selectedLocations[currentVehicleIndex] = idx;
-        
-        // Update UI
-        document.querySelectorAll('.lokasi-card').forEach(card => card.classList.remove('selected'));
-        this.closest('.lokasi-card').classList.add('selected');
-        
-        // Update button text
-        document.querySelectorAll('.lokasi-card-btn').forEach(b => b.textContent = 'Pilih Lokasi');
-        this.textContent = '✓ Terpilih';
-        
-        // Check if all vehicles have locations selected
-        updateMainActionButton();
-      });
-    });
+  const currentVehicle = vehiclesData[currentVehicleIndex];
+  if (!currentVehicle) {
+    container.innerHTML = '<p style="text-align:center;color:#999;padding:40px;">Kendaraan tidak ditemukan.</p>';
+    return;
   }
+
+  // FILTER lokasi sesuai jenis kendaraan
+  let filteredList = [];
+
+  if (currentVehicle.jenis === 'rumah') {
+    // Untuk rumah: tampilkan yang mengandung 'REC' atau jenisnya 'Sertifikat Digital'
+    filteredList = originalList.filter(l =>
+      l.nama.toLowerCase().includes('rec') || l.jenis === 'Sertifikat Digital'
+    );
+  } else {
+    // Untuk kendaraan (darat/laut/udara): tampilkan selain 'REC' dan selain 'Sertifikat Digital'
+    filteredList = originalList.filter(l =>
+      !l.nama.toLowerCase().includes('rec') && l.jenis !== 'Sertifikat Digital'
+    );
+  }
+
+  if (!filteredList.length) {
+    container.innerHTML = '<p style="text-align:center;color:#999;padding:40px;">Tidak ada lokasi tersedia untuk jenis ini.</p>';
+    return;
+  }
+
+  filteredList.forEach((lokasi, idx) => {
+    const isSelected = selectedLocations[currentVehicleIndex] === lokasiList.indexOf(lokasi);
+    const card = document.createElement('div');
+    card.className = `lokasi-card ${isSelected ? 'selected' : ''}`;
+    card.innerHTML = `
+      <img src="${lokasi.gambar}" alt="${lokasi.nama}" onerror="this.src='/placeholder.svg?height=140&width=280&text=${encodeURIComponent(lokasi.nama)}'">
+      <div class="lokasi-card-body">
+        <div class="lokasi-card-title">${lokasi.nama}</div>
+        <div class="lokasi-card-desc">${lokasi.deskripsi}</div>
+        <button class="lokasi-card-btn" data-idx="${lokasiList.indexOf(lokasi)}">
+          ${isSelected ? '✓ Terpilih' : 'Pilih Lokasi'}
+        </button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  // Add click handlers
+  document.querySelectorAll('.lokasi-card-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const idx = parseInt(this.dataset.idx);
+      selectedLocations[currentVehicleIndex] = idx;
+
+      document.querySelectorAll('.lokasi-card').forEach(card => card.classList.remove('selected'));
+      this.closest('.lokasi-card').classList.add('selected');
+
+      document.querySelectorAll('.lokasi-card-btn').forEach(b => b.textContent = 'Pilih Lokasi');
+      this.textContent = '✓ Terpilih';
+
+      updateMainActionButton();
+    });
+  });
+}
+
 
   function updateMainActionButton() {
     const allSelected = vehiclesData.every((_, index) => selectedLocations[index] !== undefined);

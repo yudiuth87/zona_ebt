@@ -115,12 +115,13 @@
   height: auto;
 }
 .img-mobil {
-  bottom: 80px;
+  top: 240px;       
   right: 50px;
   width: 280px;
   height: auto;
   z-index: 5;
 }
+
 
 /* ===== Section “Apa itu Carbon Footprint?” ===== */
 .about {

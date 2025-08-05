@@ -821,7 +821,6 @@ const transportasiData = {
   'udara': {
     vehicles: [
       { name: 'Pesawat Komersil', icon: '✈️' },
-      { name: 'Pesawat Pribadi', icon: '🛩️' }
     ],
     fuels: [
       { name: 'Avtur' }
@@ -830,9 +829,6 @@ const transportasiData = {
       'Pesawat Komersil': {
         'Avtur': 0.90
       },
-      'Pesawat Pribadi': {
-        'Avtur': 1.20
-      }
     }
   },
   'rumah': {

@@ -194,7 +194,7 @@
               $transportIcons = [
                 'darat' => ['Mobil' => '🚗', 'Motor' => '🏍️', 'Bus' => '🚌', 'Kereta' => '🚆'],
                 'laut' => ['Kapal Penumpang' => '⛴️', 'Kapal Barang' => '🚢'],
-                'udara' => ['Pesawat Komersil' => '✈️', 'Pesawat Pribadi' => '🛩️'],
+                'udara' => ['Pesawat Komersil' => '✈️'],
                 'rumah' => ['AC' => '❄️', 'Kulkas' => '🧊', 'Lampu' => '💡', 'Mesin Cuci' => '🧺']
               ];
               if (isset($transportIcons[$transportType][$vehicleType])) {

@@ -48,6 +48,14 @@
       font-size: 24px;
       color: #333;
     }
+
+    
+  .logo-image {
+  height: 80px;  
+  width: auto;
+  object-fit: contain;
+}
+
     .branding .logo-z {
       color: #C0D461;
     }
@@ -274,12 +282,11 @@
   {{-- Header --}}
   <div class="header">
     <div class="branding">
-      <span class="logo-z">Z</span><span class="logo-e">E</span>onaEBT
-    </div>
+  <img src="{{ asset('assets/images/logo.png') }}" alt="ZonaEBT Logo" class="logo-image">
+</div>
     <nav>
       <a href="{{ route('beranda') }}" class="{{ request()->routeIs('beranda') ? 'active' : '' }}">Beranda</a>
       <a href="{{ route('kalkulator') }}" class="{{ request()->routeIs('kalkulator') ? 'active' : '' }}">Kalkulator</a>
-      <a href="{{ route('tentang') }}" class="{{ request()->routeIs('tentang') ? 'active' : '' }}">Tentang</a>
     </nav>
     <div class="search-area">
       <div class="search-input-wrapper" id="searchInputWrapper">
