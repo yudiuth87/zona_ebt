@@ -800,34 +800,27 @@ const transportasiData = {
   },
   'laut': {
     vehicles: [
-      { name: 'Kapal Penumpang', icon: '⛴️' },
-      { name: 'Kapal Barang', icon: '🚢' }
+      { name: 'Kapal Ferry', icon: '🚢' }
     ],
     fuels: [
-      { name: 'Solar' },
-      { name: 'LNG' }
+      { name: 'Solar' }
     ],
     emissionFactors: {
-      'Kapal Penumpang': {
-        'Solar': 0.25,
-        'LNG': 0.18
-      },
-      'Kapal Barang': {
-        'Solar': 0.30,
-        'LNG': 0.22
+      'Kapal Ferry': {
+        'Solar': 0.11
       }
     }
   },
   'udara': {
     vehicles: [
-      { name: 'Pesawat Komersil', icon: '✈️' },
+      { name: 'Pesawat Domestik', icon: '✈️' },
     ],
     fuels: [
       { name: 'Avtur' }
     ],
     emissionFactors: {
-      'Pesawat Komersil': {
-        'Avtur': 0.90
+      'Pesawat Domestik': {
+        'Avtur': 0.25
       },
     }
   },

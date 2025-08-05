@@ -193,8 +193,8 @@
               $vehicleType = $vehicle['jenis_kendaraan'] ?? '';
               $transportIcons = [
                 'darat' => ['Mobil' => '🚗', 'Motor' => '🏍️', 'Bus' => '🚌', 'Kereta' => '🚆'],
-                'laut' => ['Kapal Penumpang' => '⛴️', 'Kapal Barang' => '🚢'],
-                'udara' => ['Pesawat Komersil' => '✈️'],
+                'laut' => ['Kapal Ferry' => '🚢'],
+                'udara' => ['Pesawat Domestik' => '✈️'],
                 'rumah' => ['AC' => '❄️', 'Kulkas' => '🧊', 'Lampu' => '💡', 'Mesin Cuci' => '🧺']
               ];
               if (isset($transportIcons[$transportType][$vehicleType])) {

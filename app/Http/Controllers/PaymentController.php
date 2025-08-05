@@ -10,21 +10,52 @@ class PaymentController extends Controller
 {
     public function pay(Request $request)
     {
-        require_once base_path('vendor/autoload.php');
-        Xendit::setApiKey(env('XENDIT_API_KEY'));
-        
-        $params = [
-            'external_id' => 'order-' . uniqid(),
-            'payer_email' => $request->email ?? 'user@email.com',
-            'description' => 'Pembayaran Offset Karbon',
-            'amount' => $request->amount ?? 50000,
-            'success_redirect_url' => url('/offset?success=1'),
-            'failure_redirect_url' => url('/offset?failed=1'),
-        ];
-        
-        $invoice = \Xendit\Invoice::create($params);
-        return response()->json(['invoice_url' => $invoice['invoice_url']]);
+        try {
+            // Ambil data dari session
+            $formData = session('form_data');
+
+            if (!$formData) {
+                return redirect()->route('offset')->with('error', 'Data diri tidak ditemukan, silakan lengkapi formulir terlebih dahulu.');
+            }
+
+            // Load Xendit
+            require_once base_path('vendor/autoload.php');
+            \Xendit\Xendit::setApiKey(env('XENDIT_API_KEY'));
+
+            // Persiapkan parameter invoice
+            $params = [
+                'external_id' => 'order-' . uniqid(),
+                'payer_email' => $formData['email'],
+                'description' => 'Pembayaran Offset Karbon oleh ' . $formData['nama_lengkap'],
+                'amount' => (int) $formData['biaya_offset'],
+                'success_redirect_url' => url('/offset?success=1'),
+                'failure_redirect_url' => url('/offset?failed=1'),
+                'customer' => [
+                    'given_names' => $formData['nama_lengkap'],
+                    'email' => $formData['email'],
+                    'mobile_number' => $formData['nomor_hp'],
+                ],
+                'customer_notification_preference' => [
+                    'invoice_created' => ['email'],
+                    'invoice_reminder' => ['email'],
+                    'invoice_paid' => ['email'],
+                    'invoice_expired' => ['email']
+                ],
+            ];
+
+            $invoice = \Xendit\Invoice::create($params);
+            return redirect($invoice['invoice_url']);
+
+        } catch (\Exception $e) {
+            \Log::error('Error in pay(): ' . $e->getMessage(), [
+                'file' => $e->getFile(),
+                'line' => $e->getLine()
+            ]);
+
+            return back()->with('error', 'Gagal membuat invoice pembayaran. Silakan coba lagi.');
+        }
     }
+
 
     public function showConfirmation(Request $request)
     {

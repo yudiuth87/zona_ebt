@@ -607,11 +607,10 @@ document.addEventListener('DOMContentLoaded', function() {
       'Kereta': '🚆'
     },
     'laut': {
-      'Kapal Penumpang': '⛴️',
-      'Kapal Barang': '🚢'
+      'Kapal Ferry': '🚢'
     },
     'udara': {
-      'Pesawat Komersil': '✈️',
+      'Pesawat Domestik': '✈️',
     },
     'rumah': {
       'AC': '❄️',
