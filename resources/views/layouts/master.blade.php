@@ -49,9 +49,9 @@
       color: #333;
     }
 
-    
+
   .logo-image {
-  height: 80px;  
+  height: 40px;  
   width: auto;
   object-fit: contain;
 }
