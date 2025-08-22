@@ -573,16 +573,20 @@ document.addEventListener('DOMContentLoaded', function() {
   
   const lokasiList = [
     {
-      nama: 'Sertifikat PLTM Gunung Wugul',
+      nama: 'Sertifikat Karbon, Pengoperasian Pembangkit Listrik Tenaga Air Minihidro (PLTM) Gunung Wugul',
       gambar: '/assets/images/lokasiCarbon/gambar-1.jpg',
-      deskripsi: 'PLTM Gunung Wugul adalah pembangkit listrik tenaga mini-hidro dengan kapasitas total 3 MW (2 x 1,5 MW) yang berlokasi di Banjarnegara, Jawa Tengah. Proyek ini merupakan bagian dari upaya pemanfaatan aliran Sungai Urang untuk menghasilkan energi terbarukan yang bersih.',
-      jenis: 'Energi Terbarukan'
+      deskripsi: 'Tujuan umum dari proyek ini adalah pemanfaatan sumber daya air dari Sungai Urang di area Banjarnegara guna menghasilkan tenaga listrik melalui Pembangkit Listrik Tenaga Minihidro (PLTM) Gunung Wugul untuk selanjutnya disalurkan ke jaringan interkoneksi listrik PLN JAMALI.',
+      jenis: 'PLTM',
+      registrasi: 'Nomor Registrasi: VER-10-PR-VI-2024-16887',
+      lokasi: 'Jalan Raya Karangkobar, Sijeruk, Banjarmangu, Banjarnegara, Provinsi Jawa Tengah'
     },
     {
-      nama: 'Proyek Lahendong Unit 5 & 6',
+      nama: 'Sertifikat Karbon, Pengoperasian Pembangkit Listrik Tenaga Panas Bumi (PLTP)  Lahendong Unit 5 & Unit 6',
       gambar: '/assets/images/lokasiCarbon/gambar-2.png',
-      deskripsi: 'Proyek Lahendong Unit 5 & 6 merupakan inisiatif pengembangan pembangkit listrik tenaga panas bumi oleh PT Pertamina Geothermal Energy Tbk di Sulawesi Utara. Setiap unit memiliki kapasitas sekitar 20 MW untuk mendukung penyediaan energi bersih nasional.',
-      jenis: 'Penanaman Pohon'
+      deskripsi: 'Tujuan umum dari proyek ini adalah pemanfaatan sumber geothermal di area pegunungan di sekitar Karaha dan Talagabodas guna menghasilkan tenaga listrik untuk selanjutnya disalurkan ke Jaringan.',
+      jenis: 'Geothermal'
+      registrasi: 'Nomor Registrasi: VER-10-PR-IX-2023-14464',
+      lokasi: 'Sendangan Ii, Tompaso, Minahasa, Provinsi Sulawesi Utara'
     },
     {
       nama: 'Sertifikat (REC) Renewable Energy Certificate – ZonaEBT',
@@ -741,8 +745,10 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="lokasi-card-body">
         <div class="lokasi-card-title">${lokasi.nama}</div>
         <div class="lokasi-card-desc">${lokasi.deskripsi}</div>
+        <div class="lokasi-card-desc">${lokasi.registrasi}</div>
+        <div class="lokasi-card-desc">${lokasi.lokasi}</div>
         <button class="lokasi-card-btn" data-idx="${lokasiList.indexOf(lokasi)}">
-          ${isSelected ? '✓ Terpilih' : 'Pilih Lokasi'}
+          ${isSelected ? '✓ Terpilih' : 'Pilih Proyek'}
         </button>
       </div>
     `;
@@ -758,7 +764,7 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('.lokasi-card').forEach(card => card.classList.remove('selected'));
       this.closest('.lokasi-card').classList.add('selected');
 
-      document.querySelectorAll('.lokasi-card-btn').forEach(b => b.textContent = 'Pilih Lokasi');
+      document.querySelectorAll('.lokasi-card-btn').forEach(b => b.textContent = 'Pilih Proyek');
       this.textContent = '✓ Terpilih';
 
       updateMainActionButton();
