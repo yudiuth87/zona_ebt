@@ -745,8 +745,6 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="lokasi-card-body">
         <div class="lokasi-card-title">${lokasi.nama}</div>
         <div class="lokasi-card-desc">${lokasi.deskripsi}</div>
-        <div class="lokasi-card-desc">${lokasi.registrasi}</div>
-        <div class="lokasi-card-desc">${lokasi.lokasi}</div>
         <button class="lokasi-card-btn" data-idx="${lokasiList.indexOf(lokasi)}">
           ${isSelected ? '✓ Terpilih' : 'Pilih Proyek'}
         </button>
