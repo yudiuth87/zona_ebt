@@ -45,7 +45,7 @@ body {
 .calculator-title h2 {
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 }
 
 .calculator-title p {
