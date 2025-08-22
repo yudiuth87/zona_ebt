@@ -125,7 +125,7 @@ body {
 
 .vehicle-tabs {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   margin-bottom: 20px;
   background: #F8F8F8;
@@ -884,9 +884,7 @@ function createVehicleForm(vehicleId, transportType = 'darat') {
       <button class="vehicle-tab-btn ${transportType === 'udara' ? 'active' : ''}" data-transport="udara" onclick="switchVehicleTransport('${vehicleId}', 'udara', this)">
         <span>✈️</span> <span class="tab-text">Udara</span>
       </button>
-      <button class="vehicle-tab-btn ${transportType === 'rumah' ? 'active' : ''}" data-transport="rumah" onclick="switchVehicleTransport('${vehicleId}', 'rumah', this)">
-        <span>🏠</span> <span class="tab-text">Rumah</span>
-      </button>
+
     </div>
     
     <div class="section-title" id="vehicleTitle_${vehicleId}">Jenis Kendaraan</div>

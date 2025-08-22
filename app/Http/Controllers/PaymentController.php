@@ -8,53 +8,55 @@ use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
-    public function pay(Request $request)
-    {
-        try {
-            // Ambil data dari session
-            $formData = session('form_data');
+// GANTI SELURUH pay method yang ada di file Anda
+public function pay(Request $request)
+{
+    try {
+        // Ambil data dari kedua sesi yang relevan
+        $formData = session('form_data');
+        $checkoutData = session('checkout_data');
 
-            if (!$formData) {
-                return redirect()->route('offset')->with('error', 'Data diri tidak ditemukan, silakan lengkapi formulir terlebih dahulu.');
-            }
-
-            // Load Xendit
-            require_once base_path('vendor/autoload.php');
-            \Xendit\Xendit::setApiKey(env('XENDIT_API_KEY'));
-
-            // Persiapkan parameter invoice
-            $params = [
-                'external_id' => 'order-' . uniqid(),
-                'payer_email' => $formData['email'],
-                'description' => 'Pembayaran Offset Karbon oleh ' . $formData['nama_lengkap'],
-                'amount' => (int) $formData['biaya_offset'],
-                'success_redirect_url' => url('/offset?success=1'),
-                'failure_redirect_url' => url('/offset?failed=1'),
-                'customer' => [
-                    'given_names' => $formData['nama_lengkap'],
-                    'email' => $formData['email'],
-                    'mobile_number' => $formData['nomor_hp'],
-                ],
-                'customer_notification_preference' => [
-                    'invoice_created' => ['email'],
-                    'invoice_reminder' => ['email'],
-                    'invoice_paid' => ['email'],
-                    'invoice_expired' => ['email']
-                ],
-            ];
-
-            $invoice = \Xendit\Invoice::create($params);
-            return redirect($invoice['invoice_url']);
-
-        } catch (\Exception $e) {
-            \Log::error('Error in pay(): ' . $e->getMessage(), [
-                'file' => $e->getFile(),
-                'line' => $e->getLine()
-            ]);
-
-            return back()->with('error', 'Gagal membuat invoice pembayaran. Silakan coba lagi.');
+        if (!$formData || !$checkoutData) {
+            return redirect()->route('offset')->with('error', 'Data diri atau rincian pembayaran tidak ditemukan. Silakan ulangi dari awal.');
         }
+
+        // Load Xendit SDK
+        require_once base_path('vendor/autoload.php');
+        \Xendit\Xendit::setApiKey(env('XENDIT_API_KEY'));
+
+        // Persiapkan parameter invoice
+        $params = [
+            'external_id' => 'order-' . uniqid(),
+            'payer_email' => $formData['email'],
+            'description' => 'Pembayaran Offset Karbon oleh ' . $formData['nama_lengkap'],
+            'amount' => (int) $checkoutData['total_cost'], // FIX: Ambil dari checkoutData['total_cost']
+            'success_redirect_url' => url('/offset?success=1'),
+            'failure_redirect_url' => url('/offset?failed=1'),
+            'customer' => [
+                'given_names' => $formData['nama_lengkap'],
+                'email' => $formData['email'],
+                'mobile_number' => $formData['nomor_hp'],
+            ],
+            'customer_notification_preference' => [
+                'invoice_created' => ['email'],
+                'invoice_reminder' => ['email'],
+                'invoice_paid' => ['email'],
+                'invoice_expired' => ['email']
+            ],
+        ];
+
+        $invoice = \Xendit\Invoice::create($params);
+        return redirect($invoice['invoice_url']);
+
+    } catch (\Exception $e) {
+        \Log::error('Error in pay(): ' . $e->getMessage(), [
+            'file' => $e->getFile(),
+            'line' => $e->getLine()
+        ]);
+
+        return back()->with('error', 'Gagal membuat invoice pembayaran. Silakan coba lagi.');
     }
+}
 
 
     public function showConfirmation(Request $request)

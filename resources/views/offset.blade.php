@@ -522,7 +522,7 @@
     </div>
 
     <div class="vehicle-locations" id="vehicleLocationsList">
-      <h4>Lokasi Offset Emisi:</h4>
+      <h4>Offset Emisi:</h4>
       <!-- Vehicle locations will be populated here -->
     </div>
 
@@ -819,7 +819,7 @@ document.addEventListener('DOMContentLoaded', function() {
       `;
     }).join('');
     
-    locationsList.innerHTML = `<h4>Lokasi Offset Emisi:</h4>${locationsHTML}`;
+    locationsList.innerHTML = `<h4>Offset Emisi:</h4>${locationsHTML}`;
   }
 
   // Navigation functions
