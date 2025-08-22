@@ -39,19 +39,19 @@ body {
 
 .calculator-title {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .calculator-title h2 {
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 20px;
 }
 
 .calculator-title p {
   color: #888;
   font-size: 14px;
-  margin-bottom: 0;
+  margin-bottom: 10px;
 }
 
 /* Vehicle Form Styles */
@@ -895,7 +895,7 @@ function createVehicleForm(vehicleId, transportType = 'darat') {
     
     <hr class="divider">
 
-    <div class="calculator-title; margin: 20px 0 10px 0" id="infoText_${vehicleId}">
+    <div class="calculator-title" id="infoText_${vehicleId}">
         <h2>Masukkan Informasi Perjalanan<br>untuk Menghitung Estimasi Emisi Karbonmu</h2>
         <p>Isi data perjalanan Anda untuk mendapatkan perkiraan emisi karbon yang akurat<br>dan langkah offset yang tepat.</p>
     </div>
