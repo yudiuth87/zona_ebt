@@ -896,8 +896,8 @@ function createVehicleForm(vehicleId, transportType = 'darat') {
     <hr class="divider">
     
     <div style="font-size:14px;font-weight:600;text-align:center;margin-bottom:12px;" id="infoText_${vehicleId}">
-        <h3 style="font-size: 1.5rem; font-weight: 700;">Masukkan Informasi Perjalanan untuk Menghitung Estimasi Emisi Karbonmu</h3>
-        <p style="font-size: 1rem; color: #555;">Isi data perjalanan Anda untuk mendapatkan perkiraan emisi karbon yang akurat dan langkah offset yang tepat.</p>
+        <h2>Masukkan Informasi Perjalanan untuk Menghitung Estimasi Emisi Karbonmu</h2>
+        <p>Isi data perjalanan Anda untuk mendapatkan perkiraan emisi karbon yang akurat dan langkah offset yang tepat.</p>
     </div>
     
     <!-- Rumah Tangga Fields -->
