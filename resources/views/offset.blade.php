@@ -487,7 +487,10 @@
   </div>
 
   <!-- Search -->
-
+  <div style="margin-bottom:24px;">
+    <input type="text" id="searchLokasi" placeholder=""
+      style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid #ddd;font-size:15px;">
+  </div>
 
   <!-- Location Cards -->
   <div id="lokasiCards"></div>
