@@ -894,8 +894,8 @@ function createVehicleForm(vehicleId, transportType = 'darat') {
     <div class="selection-grid" id="fuelGrid_${vehicleId}"></div>
     
     <hr class="divider">
-    
-    <div style="font-size:14px;font-weight:600;text-align:center;margin-bottom:12px;" id="infoText_${vehicleId}">
+
+    <div class="calculator-title" id="infoText_${vehicleId}">
         <h2>Masukkan Informasi Perjalanan untuk Menghitung Estimasi Emisi Karbonmu</h2>
         <p>Isi data perjalanan Anda untuk mendapatkan perkiraan emisi karbon yang akurat dan langkah offset yang tepat.</p>
     </div>
