@@ -661,7 +661,7 @@ body {
 <div class="calculator-wrapper">
   <div class="calculator-title">
     <h2>Masukan Data Aktivitas Karbonmu</h2>
-    <p>Isi informasi kendaraan dan aktivitas sehari-harimu<br>untuk menghitung emisi CO2 secara otomatis.</p>
+    <p>Bagikan detail kendaraan dan kebiasaan harian Anda<br>untuk menghitung emisi CO2 secara otomatis dengan mudah.</p>
   </div>
 
   <!-- Debug Section -->
@@ -896,7 +896,8 @@ function createVehicleForm(vehicleId, transportType = 'darat') {
     <hr class="divider">
     
     <div style="font-size:14px;font-weight:600;text-align:center;margin-bottom:12px;" id="infoText_${vehicleId}">
-      Masukan Informasi Perjalanan Untuk Menghitung Estimasi Emisi Karbonmu
+        <h3 style="font-size: 1.5rem; font-weight: 700;">Masukkan Informasi Perjalanan untuk Menghitung Estimasi Emisi Karbonmu</h3>
+        <p style="font-size: 1rem; color: #555;">Isi data perjalanan Anda untuk mendapatkan perkiraan emisi karbon yang akurat dan langkah offset yang tepat.</p>
     </div>
     
     <!-- Rumah Tangga Fields -->
