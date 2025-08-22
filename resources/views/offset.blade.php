@@ -486,6 +486,11 @@
     </div>
   </div>
 
+  <!-- Search -->
+  <div style="margin-bottom:24px;">
+    <input type="text" id="searchLokasi" placeholder="Cari Lokasi Penanaman"
+      style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid #ddd;font-size:15px;">
+  </div>
 
   <!-- Location Cards -->
   <div id="lokasiCards"></div>
@@ -522,7 +527,7 @@
     </div>
 
     <button class="main-action-btn enabled" onclick="proceedToCheckout()">
-      Offset Sekarang 🚀
+      Tebus Sekarang 🚀
     </button>
   </div>
 </div>
@@ -568,20 +573,16 @@ document.addEventListener('DOMContentLoaded', function() {
   
   const lokasiList = [
     {
-      nama: 'Sertifikat Karbon, Pengoperasian Pembangkit Listrik Tenaga Air Minihidro (PLTM) Gunung Wugul'
+      nama: 'Sertifikat PLTM Gunung Wugul',
       gambar: '/assets/images/lokasiCarbon/gambar-1.jpg',
-      deskripsi: 'Tujuan umum dari proyek ini adalah pemanfaatan sumber daya air dari Sungai Urang di area Banjarnegara guna menghasilkan tenaga listrik melalui Pembangkit Listrik Tenaga Minihidro (PLTM) Gunung Wugul untuk selanjutnya disalurkan ke jaringan interkoneksi listrik PLN JAMALI.',
-      jenis: 'PLTM',
-      registrasi: 'VER-10-PR-VI-2024-16887',
-      lokasi: 'Jalan Raya Karangkobar, Sijeruk, Banjarmangu, Banjarnegara, Provinsi Jawa Tengah'
+      deskripsi: 'PLTM Gunung Wugul adalah pembangkit listrik tenaga mini-hidro dengan kapasitas total 3 MW (2 x 1,5 MW) yang berlokasi di Banjarnegara, Jawa Tengah. Proyek ini merupakan bagian dari upaya pemanfaatan aliran Sungai Urang untuk menghasilkan energi terbarukan yang bersih.',
+      jenis: 'Energi Terbarukan'
     },
     {
-      nama: 'Sertifikat Karbon, Pengoperasian Pembangkit Listrik Tenaga Panas Bumi (PLTP)  Lahendong Unit 5 & Unit 6',
+      nama: 'Proyek Lahendong Unit 5 & 6',
       gambar: '/assets/images/lokasiCarbon/gambar-2.png',
-      deskripsi: 'Tujuan umum dari proyek ini adalah pemanfaatan sumber geothermal di area pegunungan di sekitar Karaha dan Talagabodas guna menghasilkan tenaga listrik untuk selanjutnya disalurkan ke Jaringan.',
-      jenis: 'Geothermal',
-      registrasi: 'VER-10-PR-IX-2023-14464',
-      lokasi: 'Sendangan Ii, Tompaso, Minahasa, Provinsi Sulawesi Utara'
+      deskripsi: 'Proyek Lahendong Unit 5 & 6 merupakan inisiatif pengembangan pembangkit listrik tenaga panas bumi oleh PT Pertamina Geothermal Energy Tbk di Sulawesi Utara. Setiap unit memiliki kapasitas sekitar 20 MW untuk mendukung penyediaan energi bersih nasional.',
+      jenis: 'Penanaman Pohon'
     },
     {
       nama: 'Sertifikat (REC) Renewable Energy Certificate – ZonaEBT',
@@ -741,7 +742,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="lokasi-card-title">${lokasi.nama}</div>
         <div class="lokasi-card-desc">${lokasi.deskripsi}</div>
         <button class="lokasi-card-btn" data-idx="${lokasiList.indexOf(lokasi)}">
-          ${isSelected ? '✓ Terpilih' : 'Pilih Proyek'}
+          ${isSelected ? '✓ Terpilih' : 'Pilih Lokasi'}
         </button>
       </div>
     `;
@@ -757,7 +758,7 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('.lokasi-card').forEach(card => card.classList.remove('selected'));
       this.closest('.lokasi-card').classList.add('selected');
 
-      document.querySelectorAll('.lokasi-card-btn').forEach(b => b.textContent = 'Pilih Proyek');
+      document.querySelectorAll('.lokasi-card-btn').forEach(b => b.textContent = 'Pilih Lokasi');
       this.textContent = '✓ Terpilih';
 
       updateMainActionButton();
