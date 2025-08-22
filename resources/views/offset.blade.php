@@ -575,7 +575,7 @@ document.addEventListener('DOMContentLoaded', function() {
     {
       nama: 'Sertifikat Karbon, Pengoperasian Pembangkit Listrik Tenaga Air Minihidro (PLTM) Gunung Wugul',
       gambar: '/assets/images/lokasiCarbon/gambar-1.jpg',
-      deskripsi: 'Tujuan umum dari proyek ini adalah pemanfaatan sumber daya air dari Sungai Urang di area Banjarnegara guna menghasilkan tenaga listrik melalui Pembangkit Listrik Tenaga Minihidro (PLTM) Gunung Wugul untuk selanjutnya disalurkan ke jaringan interkoneksi listrik PLN JAMALI.',
+      deskripsi: 'Tujuan umum dari proyek ini adalah pemanfaatan sumber daya air dari Sungai Urang di area Banjarnegara guna menghasilkan tenaga listrik melalui Pembangkit Listrik Tenaga Minihidro (PLTM) Gunung Wugul untuk selanjutnya disalurkan ke jaringan interkoneksi listrik PLN JAMALI.<br><br>Nomor Registri<br>VER-10-PR-VI-2024-16887<br><br>Lokasi<br>Jalan Raya Karangkobar, Sijeruk, Banjarmangu, Banjarnegara, Provinsi Jawa Tengah',
       jenis: 'PLTM'
     },
     {
