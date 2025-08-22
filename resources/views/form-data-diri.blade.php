@@ -278,7 +278,7 @@
   <!-- Header -->
   <div class="form-header">
     <h1 class="form-title">Lengkapi Data Diri Anda</h1>
-    <p class="form-subtitle">Isi data diri untuk melanjutkan proses carbon offset Anda</p>
+    <p class="form-subtitle">Masukkan informasi pribadi Anda untuk menyelesaikan proses offset karbon dan mendukung langkah ramah lingkungan Anda.</p>
   </div>
 
   <!-- Order Summary -->
