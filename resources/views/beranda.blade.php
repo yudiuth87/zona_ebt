@@ -705,46 +705,5 @@ html,body {
 
 <script src="//unpkg.com/alpinejs" defer></script>
 
-<section class="offset-section">
-  <h2 class="offset-section-title">
-    Kegiatan Karbon Offset
-  </h2>
-  <div class="offset-cards-grid">
-    @foreach ($cards as $index => $card)
-    <div class="offset-card" x-data="{ isOpen: false }">
-      <!-- Gambar dan Judul -->
-      <div class="offset-card-image-wrapper">
-        <img
-          src="{{ asset('assets/images/infografik/' . $card['gambar']) }}"
-          alt="{{ $card['judul'] }}"
-          class="offset-card-image"
-        >
-        <div class="offset-card-overlay">
-          <p class="offset-card-title">{{ $card['judul'] }}</p>
-          <p class="offset-card-location">Lokasi: {{ $card['lokasi'] }}</p>
-        </div>
-      </div>
-      <!-- Tombol Lihat/Tutup -->
-      <div class="offset-card-button-wrapper">
-        <button
-          @click="isOpen = !isOpen"
-          class="offset-card-button"
-          :class="{'active': isOpen}"
-        >
-          <span x-text="isOpen ? 'Tutup Detail' : 'Lihat Detail'"></span>
-        </button>
-      </div>
-      <!-- Detail Konten Expand -->
-      <div
-        x-show="isOpen"
-        x-transition
-        class="offset-card-detail"
-      >
-        <p>{{ $card['deskripsi'] }}</p>
-        <p><strong>Lokasi:</strong> {{ $card['lokasi'] }}</p>
-      </div>
-    </div>
-    @endforeach
-  </div>
-</section>
+
 @endsection
