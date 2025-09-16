@@ -1211,7 +1211,7 @@ function calculateVehicleEmission(vehicleId) {
   document.getElementById(`total_emisi_${vehicleId}`).textContent = totalEmission.toFixed(2);
 
   if (vehicle.transportType === 'rumah') {
-    document.getElementById(`resultEmisi_${vehicleId}`).textContent = (totalEmission / 1000).toFixed(2) + ' ton CO₂e';
+    document.getElementById(`resultEmisi_${vehicleId}`).textContent = (totalEmission / 1000).toFixed(2) + ' kg CO₂e';
     const offset = Math.round((totalEmission / 1000) * 190000);
     document.getElementById(`resultOffset_${vehicleId}`).textContent = 'Rp. ' + offset.toLocaleString('id-ID');
   } else {
