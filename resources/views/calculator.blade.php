@@ -696,7 +696,7 @@ body {
     <div class="total-grid">
       <div class="total-item">
         <div class="total-label">Total Emisi</div>
-        <div class="total-value total-emission" id="totalEmission">0,00 ton CO₂e</div>
+        <div class="total-value total-emission" id="totalEmission">0,00 kg CO₂e</div>
       </div>
       <div class="total-item">
         <div class="total-label">Perkiraan Biaya Offset</div>
