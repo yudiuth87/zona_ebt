@@ -953,7 +953,7 @@ function createVehicleForm(vehicleId, transportType = 'darat') {
     <div class="vehicle-result-card">
       <div>
         <div class="vehicle-result-label" id="resultLabel_${vehicleId}">Emisi Kendaraan Ini</div>
-        <div class="vehicle-result-value" id="resultEmisi_${vehicleId}">0,00 ton CO₂e</div>
+        <div class="vehicle-result-value" id="resultEmisi_${vehicleId}">0,00 kg CO₂e</div>
       </div>
       <div>
         <div class="vehicle-result-label">Biaya Offset</div>
@@ -1239,7 +1239,7 @@ function calculateTotalEmissions() {
     }
   });
   
-  document.getElementById('totalEmission').textContent = (totalEmission).toFixed(2) + ' ton CO₂e';
+  document.getElementById('totalEmission').textContent = (totalEmission).toFixed(2) + ' kg CO₂e';
   document.getElementById('totalOffset').textContent = 'Rp. ' + totalOffset.toLocaleString('id-ID');
 }
 
